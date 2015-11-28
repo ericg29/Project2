@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["type"] = $_POST["type"];
 ?>
 
 <html lang="en">
@@ -9,17 +8,36 @@ $_SESSION["type"] = $_POST["type"];
     <title>Find Next Available Appointment</title>
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>  </head>
   <body>
-	<div id="login">
-      <div id="form">
-        <div class="top">
+	<div class="container">
+	<?php
+		include('./header.php');
+	?>
+	<div class="container main">
+	<div id="nav">
+		<form action="StudProcessHome.php" method="post" name="Home">
+		<?php
+			if ($studExist == false || $adminCancel == true || $noApp == true){
+				
+				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
+				echo "<div class='button selected'>Find the next available appointment</div><br>";
+			}
+			else{
+				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Cancel'>Cancel my appointment</button><br>";
+			}
+			echo "<button type='submit' name='selection' class='button main selection' value='Search'>Search for appointment</button><br>";
+			echo "<button type='submit' name='selection' class='button main selection' value='Edit'>Edit student information</button><br>";
+		?>
+		</form>
+	</div>
+	<div id="section">
+        <div class="top" style="text-align: center;">
 		<h1>Find Next Available Appointment</h1>
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
-	    <?php
-			$debug = false;
-			include('../CommonMethods.php');
-			$COMMON = new Common($debug);
-			
+	    <?php			
+			$_SESSION["type"] = $_POST["type"];
 			//get variables
 			$studid = $_SESSION["studID"];
 			$major = $_SESSION["major"];
@@ -76,15 +94,15 @@ $_SESSION["type"] = $_POST["type"];
 				
 				//print appt info
 				echo "<h2>Confirm Appointment</h2>";
-				echo "<label for='newinfo'>";
-				echo "Advisor: ",$advisorName,"<br>";
-				echo "Appointment: ",date('l, F d, Y g:i A', $timephp), "<br>";
-				echo "Location: ", $location, "</label>";
+				echo "<br><label for='newinfo' style='font-weight: normal;'>";
+				echo "<b>Advisor</b>: ",$advisorName,"<br>";
+				echo "<b>Appointment</b>: ",date('l, F d, Y g:i A', $timephp), "<br>";
+				echo "<b>Location</b>: ", $location, "</label>";
 			
 				//print submit button
 				echo "</div>";
-				echo "<div class=\"nextButton\">";
-				echo "<input type='submit' name='finish' class='button large go' value='Submit' style='margin-right: 50px'>";
+				echo "<div class=\"nextButton\"><div>";
+				echo "<input type=\"submit\" name=\"finish\" class=\"button large go\" value=\"Submit\" style=\"width: 90px; margin-right: 30px;\">";
 			}
 			//if no appt available
 			else
@@ -93,9 +111,18 @@ $_SESSION["type"] = $_POST["type"];
 				$_SESSION["advisor"] = "unavailable";
 			}
 		?>
-			<input type="submit" name="finish" class="button large" value="Cancel">
+		<input type='submit' name='finish' class='button large' value='Cancel' style='width: 90px;'>
+		</div>
 	    </div>
 		</form>
+		<br>
 		</div>
+	</div>
+	</div>
+	<?php
+		include('./footer.php');
+	?>
+	</div>
   </body>
 </html>
+

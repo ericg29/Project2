@@ -12,7 +12,7 @@ $studid = $_SESSION["studID"];
   <body>
 	<div class="container">
 	<?php
-		include('../header.php');
+		include('./header.php');
 	?>
 	<div class="container main">
 	<div id="nav">
@@ -86,7 +86,7 @@ $studid = $_SESSION["studID"];
 	</div>
 	</div>
 	<?php
-		include('../footer.php');
+		include('./footer.php');
 	?>
 	</div>
   </body>

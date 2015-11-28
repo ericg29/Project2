@@ -11,7 +11,7 @@ session_start();
   <body>
 	<div class="container">
 	<?php
-		include('../header.php');
+		include('./header.php');
 	?>
 	<div class="container main">
 	<div id="nav">
@@ -52,7 +52,7 @@ session_start();
 	</div>
 	</div>
 	<?php
-		include('../footer.php');
+		include('./footer.php');
 	?>
 	</div>
   </body>

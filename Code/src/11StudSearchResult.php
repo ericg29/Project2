@@ -15,28 +15,10 @@ session_start();
   <body>
 	<div class="container">
 	<?php
-		include('../header.php');
+		include('./header.php');
 	?>
 	<div class="container main">
-	<div id="nav">
-		<form action="StudProcessHome.php" method="post" name="Home">
-		<?php
-			if ($studExist == false || $adminCancel == true || $noApp == true){
-				
-				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
-			}
-			else{
-				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button main selection' value='Cancel'>Cancel my appointment</button><br>";
-			}
-			echo "<div class='button selected'>Search for appointment</div><br>";
-			echo "<button type='submit' name='selection' class='button main selection' value='Edit'>Edit student information</button><br>";
-		?>
-		</form>
-	</div>
-	<div id="section">
+	<div id="sectionFullLarge">
 		<div class="top">
 		<h1>Search Results</h1>
 	    <div class="field" style="font-size: 14px">
@@ -177,8 +159,8 @@ session_start();
 				}
 				//otherwise print table with all appts found
 				else{					
-					echo("<table border='1' width=600px><th colspan='3'>Appointments Available</th>\n");
-					echo("<tr><td>Time:</td><td>Advisor</td><td width=155px>Major</td></tr>\n");
+					echo("<table border='1' width=896px><th colspan='3'>Appointments Available</th>\n");
+					echo("<tr><td>Time:</td><td>Advisor</td><td>Major</td></tr>\n");
 
 					foreach($results as $r){ echo($r."\n"); }
 
@@ -199,7 +181,7 @@ session_start();
 	</div>
 	</div>
 	<?php
-		include('../footer.php');
+		include('./footer.php');
 	?>
 	</div>
   </body>

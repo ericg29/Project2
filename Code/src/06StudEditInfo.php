@@ -11,7 +11,7 @@ session_start();
   <body>
 	<div class="container">
 	<?php
-		include('../header.php');
+		include('./header.php');
 		
 		//get student that matches ID
 		$sql = "select * from Proj2Students WHERE `StudentID` = " . "\"" . $_SESSION["studID"] . "\"";
@@ -116,7 +116,7 @@ session_start();
 	</div>
 	</div>
 	<?php
-		include('../footer.php');
+		include('./footer.php');
 	?>
 	</div>
   </body>

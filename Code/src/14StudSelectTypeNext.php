@@ -11,7 +11,7 @@ session_start();
   <body>
 	<div class="container">
 	<?php
-		include('../header.php');
+		include('./header.php');
 	?>
 	<div class="container main">
 	<div id="nav">
@@ -20,7 +20,7 @@ session_start();
 			if ($studExist == false || $adminCancel == true || $noApp == true){
 				
 				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
+				echo "<div class='button selected'>Find the next available appointment</div><br>";
 			}
 			else{
 				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
@@ -53,7 +53,7 @@ session_start();
 	  </div>
 	</div>
 	<?php
-		include('../footer.php');
+		include('./footer.php');
 	?>
 	</div>
   </body>

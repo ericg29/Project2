@@ -6,26 +6,33 @@
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
-        <form method="link" action="01StudSignIn.html">
-	<input type="submit" name="next" class="button large go" value="Sign in as a Student" style="margin: 7px;">
-	</form>
-	
-	<br />
-	<br />
-
-	<form method="link" action="AdminSignIn.html">
-	<input type="submit" name="next" class="button large go" value="Sign in as an Admin" style="margin: 7px;">
-	</form>
-          
-        </div>
-        <div class="field">
-          
-        </div>
-	</div>
+	<div class="container">
+	<?php
+		include('../header.php');
+	?>
+	<div class="container main">
+	<div id="sectionFull">
+	<div class="top">
+	<form method="link" action="01StudSignIn.html">
+		<input type="submit" name="next" class="button large go" value="Sign in as a Student" style="margin: 7px;">
+		</form>
 		
+		<br />
+		<br />
+
+		<form method="link" action="AdminSignIn.html">
+		<input type="submit" name="next" class="button large go" value="Sign in as an Admin" style="margin: 7px;">
+		</form>
+          
+    </div>
+	</div>
+	</div>
+	<?php
+		include('../footer.php');
+	?>
+	</div>
   </body>
   
 </html>
+
+

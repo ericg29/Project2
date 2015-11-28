@@ -12,7 +12,7 @@ session_start();
   <body>
 	<div class="container">
 	<?php
-		include('../header.php');
+		include('./header.php');
 		
 		$debug = false;
 
@@ -116,7 +116,7 @@ session_start();
 	</div>
 	</div>
 	<?php
-		include('../footer.php');
+		include('./footer.php');
 	?>
 	</div>
   </body>
