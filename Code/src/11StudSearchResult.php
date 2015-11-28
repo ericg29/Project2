@@ -4,9 +4,6 @@ session_start();
 //ini_set('display_startup_errors','1');
 //error_reporting (E_ALL);
 
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
 ?>
 
 <html lang="en">
@@ -16,13 +13,34 @@ $COMMON = new Common($debug);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+	<div class="container">
+	<?php
+		include('../header.php');
+	?>
+	<div class="container main">
+	<div id="nav">
+		<form action="StudProcessHome.php" method="post" name="Home">
+		<?php
+			if ($studExist == false || $adminCancel == true || $noApp == true){
+				
+				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
+			}
+			else{
+				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Cancel'>Cancel my appointment</button><br>";
+			}
+			echo "<div class='button selected'>Search for appointment</div><br>";
+			echo "<button type='submit' name='selection' class='button main selection' value='Edit'>Edit student information</button><br>";
+		?>
+		</form>
+	</div>
+	<div id="section">
+		<div class="top">
 		<h1>Search Results</h1>
-		<h3>Showing open appointments only</h3>
-	    <div class="field">
-			<p>Showing results for: </p>
+	    <div class="field" style="font-size: 14px">
+			<p style="font-size: 14px">Showing results for: </p>
 			<?php
 				//set up variables
 				$date = $_POST["date"];
@@ -65,6 +83,7 @@ $COMMON = new Common($debug);
 					}
 				}
 				?>
+				<p style="font-size: 14px; font-weight: bold;">Showing open appointments only</p>
 				<br><br><label>
 				<?php
 				//if no times selected, get all times from selected advisor
@@ -168,15 +187,21 @@ $COMMON = new Common($debug);
 			?>
 			</label>
         </div>
+		<p style="font-size: 12px">If the Major category is followed by a blank, then it is open for all majors.</p>
+		</div>
+		<div class="bottom">		
 		<form action="02StudHome.php" method="link">
 	    <div class="nextButton">
 			<input type="submit" name="done" class="button large go" value="Done">
 	    </div>
 		</form>
 		</div>
-		<div class="bottom">
-		<p>If the Major category is followed by a blank, then it is open for all majors.</p>
-		</div>
+	</div>
+	</div>
+	<?php
+		include('../footer.php');
+	?>
+	</div>
   </body>
 </html>
 

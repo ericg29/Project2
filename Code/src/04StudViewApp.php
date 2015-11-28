@@ -1,10 +1,6 @@
 <?php
 session_start();
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
-
-$studID = $_SESSION["studID"];
+$studid = $_SESSION["studID"];
 ?>
 
 <html lang="en">
@@ -14,9 +10,31 @@ $studID = $_SESSION["studID"];
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+	<div class="container">
+	<?php
+		include('../header.php');
+	?>
+	<div class="container main">
+	<div id="nav">
+		<form action="StudProcessHome.php" method="post" name="Home">
+		<?php
+			if ($studExist == false || $adminCancel == true || $noApp == true){
+				
+				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
+			}
+			else{
+				echo "<div class='button selected'>View my appointment</div><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Cancel'>Cancel my appointment</button><br>";
+			}
+			echo "<button type='submit' name='selection' class='button main selection' value='Search'>Search for appointment</button><br>";
+			echo "<button type='submit' name='selection' class='button main selection' value='Edit'>Edit student information</button><br>";
+		?>
+		</form>
+	</div>
+	<div id="section">
+	    <div class="top">
 		<h1>View Appointment</h1>
 	    <div class="field">
 	    <?php
@@ -46,10 +64,10 @@ $studID = $_SESSION["studID"];
 				}
 			
 				//display appt info
-				echo "<label for='info'>";
-				echo "Advisor: ", $advisorName, "<br>";
-				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "<br>";
-				echo "Location: ", $location, "</label>";
+				echo "<label for='info' style='font-weight: normal;'>";
+				echo "<b>Advisor</b>: ", $advisorName, "<br>";
+				echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $datephp), "<br>";
+				echo "<b>Location</b>: ", $location, "</label>";
 			}
 			else // something is up, and there DB table needs to be fixed
 			{
@@ -61,10 +79,15 @@ $studID = $_SESSION["studID"];
 
 		?>
         </div>
+		</div>
 	    <div class="finishButton">
 			<button onclick="location.href = '02StudHome.php'" class="button large go" >Return to Home</button>
 	    </div>
-		</div>
-		</form>
+	</div>
+	</div>
+	<?php
+		include('../footer.php');
+	?>
+	</div>
   </body>
 </html>

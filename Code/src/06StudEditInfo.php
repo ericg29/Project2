@@ -1,15 +1,6 @@
 <?php
 session_start();
 
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
-
-//get student that matches ID
-$sql = "select * from Proj2Students WHERE `StudentID` = " . "\"" . $_SESSION["studID"] . "\"";
-$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-$row = mysql_fetch_row($rs);
-
 ?>
 <html lang="en">
   <head>
@@ -18,9 +9,36 @@ $row = mysql_fetch_row($rs);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-			<div class="top">
+	<div class="container">
+	<?php
+		include('../header.php');
+		
+		//get student that matches ID
+		$sql = "select * from Proj2Students WHERE `StudentID` = " . "\"" . $_SESSION["studID"] . "\"";
+		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+		$row = mysql_fetch_row($rs);
+	?>
+	<div class="container main">
+	<div id="nav">
+		<form action="StudProcessHome.php" method="post" name="Home">
+		<?php
+			if ($studExist == false || $adminCancel == true || $noApp == true){
+				
+				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
+			}
+			else{
+				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Cancel'>Cancel my appointment</button><br>";
+			}
+			echo "<button type='submit' name='selection' class='button main selection' value='Search'>Search for appointment</button><br>";
+			echo "<div class='button selected'>Edit student information</div><br>";
+		?>
+		</form>
+	</div>
+	<div id="section">
+		<div class="top">
 			<h2>Edit Student Information<span class="login-create"></span></h2>
 			<form action="StudProcessEdit.php" method="post" name="Edit">
 			<div class="field">
@@ -93,8 +111,14 @@ $row = mysql_fetch_row($rs);
 			<div class="nextButton">
 				<input type="submit" name="save" class="button large go" value="Save">
 			</div>
-			</div>
-		</form>
+			</form>
+		</div>
+	</div>
+	</div>
+	<?php
+		include('../footer.php');
+	?>
+	</div>
   </body>
   
 </html>

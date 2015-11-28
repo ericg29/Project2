@@ -1,8 +1,5 @@
 <?php
 session_start();
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
 ?>
 
 <html lang="en">
@@ -12,8 +9,30 @@ $COMMON = new Common($debug);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
+	<div class="container">
+	<?php
+		include('../header.php');
+	?>
+	<div class="container main">
+	<div id="nav">
+		<form action="StudProcessHome.php" method="post" name="Home">
+		<?php
+			if ($studExist == false || $adminCancel == true || $noApp == true){
+				
+				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
+			}
+			else{
+				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Cancel'>Cancel my appointment</button><br>";
+			}
+			echo "<div class='button selected'>Search for appointment</div><br>";
+			echo "<button type='submit' name='selection' class='button main selection' value='Edit'>Edit student information</button><br>";
+		?>
+		</form>
+	</div>
+	<div id="section">
         <div class="top">
 		<h1>Search for Appointments</h1>
 	    <div class="field">
@@ -57,14 +76,18 @@ $COMMON = new Common($debug);
 	    <div class="nextButton">
 			<input type="submit" name="go" class="button large go" value="Go">
 	    </div>
-		</div>
 		</form>
+		</div>
 		<form action="02StudHome.php" method="post" name="complete">
 	    <div class="returnButton">
 			<input type="submit" name="return" class="button large go" value="Return to Home">
 	    </div>
-		</div>
 		</form>
-
+	</div>
+	</div>
+	<?php
+		include('../footer.php');
+	?>
+	</div>
   </body>
 </html>

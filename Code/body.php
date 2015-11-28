@@ -1,23 +1,36 @@
 <?php
-session_start();
-?>
+	session_start();
+	$debug = false;
 
+	$studExist = false;
+	$adminCancel = false;
+	$noApp = false;
+	$studid = $_SESSION["studID"];
+
+	$sql = "select * from Proj2Students where `StudentID` = '$studid'";
+	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+	$row = mysql_fetch_row($rs);
+
+	if (!empty($row)){
+		$studExist = true;
+		if($row[6] == 'C'){
+			$adminCancel = true;
+		}
+		if($row[6] == 'N'){
+			$noApp = true;
+		}
+	}
+?>
+		
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Select Advising Type</title>
-	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
-  </head>
-  <body>
-	<div class="container">
-	<?php
-		include('../header.php');
-	?>
-	<div class="container main">
+	<link rel='stylesheet' type='text/css' href='css/standard.css'/>
+  </head>		
 	<div id="nav">
 		<form action="StudProcessHome.php" method="post" name="Home">
 		<?php
-			if ($studExist == false || $adminCancel == true || $noApp == true){
+			if ($_SESSION["studExist"] == false || $adminCancel == true || $noApp == true){
 				
 				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
 				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
@@ -32,33 +45,4 @@ session_start();
 		?>
 		</form>
 	</div>
-	<div id="section">
-      <div class="top">
-		<h1>Find Next Available Appointment</h1>
-		<h2>What kind of advising appointment would you like?</h2><br>
-		<form action="15StudConfirmNext.php" method="post" name="SelectType" style="text-align: center;">
-	<div class="nextButton" style="text-algin: center;">
-		<input type="submit" name="type" class="button large go" value="Individual" style="margin-right: 60px;">
-		<input type="submit" name="type" class="button large go" value="Group">
-	    </div>
-		</form>
-		<br>
-		<br>
-		</div>
-		<div>
-		<form method="link" action="02StudHome.php">
-		<input type="submit" name="home" class="button large" value="Cancel">
-		</form>
-		</div>
-	  </div>
-	</div>
-	<?php
-		include('../footer.php');
-	?>
-	</div>
-  </body>
-</html>
-
-
-
-  
+ </html>

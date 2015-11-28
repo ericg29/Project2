@@ -1,8 +1,7 @@
 <?php
 session_start();
 $debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
+
 ?>
 
 <html lang="en">
@@ -12,9 +11,31 @@ $COMMON = new Common($debug);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+    <div class="container">
+	<?php
+		include('../header.php');
+	?>
+	<div class="container main">
+	<div id="nav">
+		<form action="StudProcessHome.php" method="post" name="Home">
+		<?php
+			if ($studExist == false || $adminCancel == true || $noApp == true){
+				
+				echo "<button type='submit' name='selection' class='button main selection' value='Signup'>Signup for an appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Next'>Find the next available appointment</button><br>";
+			}
+			else{
+				echo "<button type='submit' name='selection' class='button main selection' value='View'>View my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button main selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<div class='button selected' >Cancel my appointment</div><br>";
+			}
+			echo "<button type='submit' name='selection' class='button main selection' value='Search'>Search for appointment</button><br>";
+			echo "<button type='submit' name='selection' class='button main selection' value='Edit'>Edit student information</button><br>";
+		?>
+		</form>
+	</div>
+	<div id="section">
+        <div class="top" style="text-align: center;">
 		<h1>Cancel Appointment</h1>
 	    <div class="field">
 	    <?php
@@ -45,22 +66,27 @@ $COMMON = new Common($debug);
 			
 			//display appt info
 			echo "<h2>Current Appointment</h2>";
-			echo "<label for='info'>";
-			echo "Advisor: ", $oldAdvisorName, "<br>";
-			echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
-			echo "Location: ", $location, "</label>";
+			echo "<div><label class='appInfo' for='info' style='font-weight: normal;'>";
+			echo "<b>Advisor</b>: ", $oldAdvisorName, "<br>";
+			echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
+			echo "<b>Location</b>: ", $location, "</label></div>";
 		?>		
-        </div>
-	    <div class="finishButton">
+		<div class="buttonContainer">
 			<form action = "StudProcessCancel.php" method = "post" name = "Cancel">
-			<input type="submit" name="cancel" class="button large go" value="Cancel" style="margin: 10px 113px;">
-			<input type="submit" name="cancel" class="button large" value="Keep" style="margin: 10px 100px;">
+				<input type="submit" name="cancel" class="button large go" value="Cancel" style="width: 90px; margin-right: 15px;">
+				<input type="submit" name="cancel" class="button large" value="Keep" style="width: 90px; margin-left: 15px;">
 			</form>
-	    </div>
+		</div>
+        </div>
 		</div>
 		<div class="bottom">
 			<p>Click "Cancel" to cancel appointment. Click "Keep" to keep appointment.</p>
 		</div>
-		</form>
+	</div>
+	</div>
+	<?php
+		include('../footer.php');
+	?>
+	</div>
   </body>
 </html>

@@ -4,126 +4,24 @@ Added comments to all files where applicable.
 ------CSS CHANGES------
 
 standard.css:
-	adjusted login bottom margin
-	adjusted button margin
-	added styling for password input fields
-	
-AdminScheduleGroup.php:
-	added line breaks after checkboxes
-AdminScheduleInd.php:
-	added line breaks after checkboxes
-AdminPrintSchedule:
-	removed	redundant styling	
-AdminEditApp:
-	adjusted button margin
-	removed redundant styling
-AdminEditGroup:
-	adjusted table column widths
-AdminEditInd:
-	adjusted table column widths
-AdminSearchApp:
-	removed	redundant styling
-AdminCreateNew:
-	removed redundant styling
-	
-StudentAdminSignIn:
-	removed redundant styling
-	added styling to center buttons
-	changed width of login div to fit buttons
-05StudCancelApp: 
-	removed redundant styling
-	adjusted top margins for buttons
-06StudEditInfo:
-	removed redundant styling
-09StudSearchApp: 
-	removed redundant styling
-	adjusted top margins for labels
-11StudSearchResult:
-	adjusted table size
+	Added fade transition for hovering over buttons and text
+	Restyled buttons on main page
 	
 
-------CODE CHANGES------
-
-AdminScheduleInd.php:
-	added option for engineering undecided
-	changed "major" checkbox values to appropriate major abbreviations
-AdminConfirmScheIndApp:
-	added code to convert full major name to abbreviation
-AdminScheduleGroup.php:
-	added page title
-	added option for engineering undecided
-	changed "major" checkbox values to appropriate major abbreviations
-AdminConfirmScheGroupApp:
-	added page title
-	added code to convert full major name to abbreviation
-AdminPrintResults:
-	added code to convert abbreviations to full major names
-AdminEditGroup:
-	added code to convert abbreviations to full major names
-AdminProceedEditGroup:
-	added code to convert abbreviations to full major names
-AdminEditInd:
-	added code to convert abbreviations to full major names
-AdminConfirmEditInd:
-	added code to convert abbreviations to full major names
-AdminSearchResults:
-	added code to convert abbreviations to full major names
-	greatly reduced line count and code complexity by reworking conditional blocks
-AdminCreateNewAdv:
-	added field for room number
-AdminCreateNew:
-	added variable for room number
-	added room number to sql query
-AdminProcessCreateNew:
-	added post for room number
-	
-01StudSignIn:
-	added Engineering Undecided option for Major
-StudProcessSignIn:
-	added code to convert full major name to abbreviation
-02StudHome:
-	added option to find next appointment
-StudProcessHome:
-	added code to make "next appointment" button function
-04StudViewApp:
-	added code to display appointment location
-05StudCancelApp:
-	removed unused variables
-	added code to display location
-StudProcessCancel:
-	removed unused variables
-06StudEditInfo:
-	select row directly rather than search the whole table w/ while loop
-	modified "major" options to interpret abbreviations taken from the database table
-	added option for "Engineering Undecided" major
-StudProcessEdit:
-	added code to convert full major name to abbreviation
-08StudSelectTime:
-	display message and hide "next" button if no appointments are available
-09StudConfirmSch:
-	removed unused variables
-	displayed appt location 
-10StudConfirmSch:
-	added code to display location
-11StudSearchResult:
-	added code to convert abbreviation to full major name
-	eliminated redundant code
-	fixed bug where array index would print to the page before the table (replaced '.' with ';' at the end of $found)
-StudProcessSch:
-	simplified if statement (line 30)
+------CODE CHANGES------	
+All html and mixed php/html files:
+	Implemented new styling
+	removed 'include commonmethods.php' and declaration of $COMMON and $debug
+	included header.php and footer.php
 
 	
 ------ADDED FILES------
-14StudSelectNextType.php:
-	button for this page appears on 02StudHome.php when the user does not have an appt yet
-	allows the user to select which type of appt they want (group or individual)
-15StudConfirmNext.php:
-	gets the next available appt based on the type selected in 14StudSelectNextType and the user's major
-	asks the user to submit the request to schedule the appt or cancel
+
+header.php:
+	includes logout button, username message
+	'include's commonmethods.php and declares $COMMON and $debug
+	checks status for studExist, adminCancel, and noApp
+
 	
 
 ------DATABASE CHANGES------
-proj2Advisors:
-	added column for office location (named Room)
-proj2Appointments:
-	changed major names in Major column to their abbreviations (for all rows)
