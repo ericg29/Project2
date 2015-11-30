@@ -60,7 +60,7 @@ $debug = false;
 			//otherwise name is "group"
 			else
 			{
-				$advisorName = "Group";
+				$oldAdvisorName = "Group";
 				$location = "ITE200";
 			}
 			

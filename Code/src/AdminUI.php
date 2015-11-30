@@ -1,11 +1,6 @@
 <?php 
 session_start();
-$debug = false;
-
 if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
-
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
 $_SESSION["PassCon"] = false;
 ?>
 
@@ -17,52 +12,34 @@ $_SESSION["PassCon"] = false;
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
-	<h2> Hello 
+	<div class="container">
 	<?php
-
-	if(!isset($_SESSION["UserN"])) // someone landed this page by accident
-	{
-		return;
-	}		
-
-		$User = $_SESSION["UserN"];
-		$Pass = $_SESSION["PassW"];
-		$sql = "SELECT `firstName` FROM `Proj2Advisors` 
-			WHERE `Username` = '$User' 
-			and `Password` = '$Pass'";
-
-		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-		$row = mysql_fetch_row($rs);
-		echo $row[0];
+		include('./header.php');
 	?>
-	</h2>
-	
-	<form action="AdminProcessUI.php" method="post" name="UI">
-  
-		<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
-		<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
-		<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
-		<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
-		<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
-	
-	</form>
-	<br>
-
-	<form method="link" action="Logout.php">
-		<input type="submit" name="next" class="button logout go" value="Log Out">
-	</form>
-          
-        </div>
-        <div class="field">
-          
-        </div>
+	<div class="container admin">
+	<div id="nav">
+		<form action="AdminProcessUI.php" method="post" name="UI">
+	  
+			<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
+			<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+			<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
+			<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
+			<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+		
+		</form>
 	</div>
-
-	<?php include('./workOrder/workButton.php'); ?>
-
+	<div id="section">
+		<h1>Welcome to COEIT Advising</h1>
+		<?php
+			if($adminCancel == true){
+				echo "<p style='color:red'>The advisor has cancelled your appointment! Please schedule a new appointment.</p>";
+			}
+		?>
+	</div>
+	</div>
+	<?php
+		include('./footer.php');
+	?>
+	</div>
 </body>
-  
 </html>

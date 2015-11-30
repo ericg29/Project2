@@ -1,8 +1,5 @@
 <?php
 session_start();
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug); 
 ?>
 
 <!DOCTYPE html>
@@ -19,17 +16,32 @@ $COMMON = new Common($debug);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
+	<div class="container">
+		<?php
+			include('./header.php');
+		?>
+		<div class="container admin">
+		<div id="nav">
+			<form action="AdminProcessUI.php" method="post" name="UI">
+		  
+				<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
+				<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+				<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
+				<div class="button selected">Search for an appointment</div><br>
+				<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+			
+			</form>
+		</div>
+		<div id="section">
         <div class="top">
 		<h1>Search Appointments</h1>
         <form action="AdminSearchResults.php" method="post" name="Confirm">
-	    <div class="field">
+	    <div class="field small">
 			<label for="date">Date</label>
 			<input id="date" type="date" name="date" placeholder="mm/dd/yyyy" autofocus> (mm/dd/yyyy)
 	    </div>
 
-	    <div class="field">
+	    <div class="field small">
 	      <label for="time">Time</label><span style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
 		<input type="checkbox" name="time[]" value="8:00:00"> 8:00am - 8:30am<br>
 		<input type="checkbox" name="time[]" value="8:30:00"> 8:30am - 9:00am<br>
@@ -48,8 +60,18 @@ $COMMON = new Common($debug);
 		<input type="checkbox" name="time[]" value="15:00:00"> 3:00pm - 3:30pm<br>
 		<input type="checkbox" name="time[]" value="15:30:00"> 3:30pm - 4:00pm<br></span>
 	    </div>
-
-	    <div class="field">
+		
+		<div class="field small">
+			<label for="studID">Student ID</label>
+			<input id="studID" type="text" name="studID" maxlength="7" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" placeholder="AB12345">
+	    </div>
+		
+		<div class="field small">
+			<label for="studLN">Student Last Name</label>
+			<input id="studLN" type="text" name="studLN">
+	    </div>
+		
+	    <div class="field small">
 	      <label for="advisor">Advisor</label>
 	      	<select id="advisor" name="advisor">
 				<option value="">All appointments</option>
@@ -67,37 +89,33 @@ $COMMON = new Common($debug);
 			</select>
 	    </div>
 		
-		<div class="field">
-			<label for="studID">Student ID</label>
-			<input id="studID" type="text" name="studID" maxlength="7" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" placeholder="AB12345">
-	    </div>
-		
-		<div class="field">
-			<label for="studLN">Student Last Name</label>
-			<input id="studLN" type="text" name="studLN">
-	    </div>
-		
-		<div class="field">
+		<div class="field small">
 			<label for="filter">Filter Open/Closed Appointments</label>
 			<select id="filter" name="filter">
 				<option value="">All</option>
 				<option value="0">Open</option>
 				<option value="1">Closed</option>
 			</select>
+			<br>
 	    </div>
 
-	<div class="nextButton">
-			<input type="submit" name="go" class="button large go" value="Go">
+		<div class="nextButton">
+				<input type="submit" name="go" class="button large go" value="Go">
+		</div>
+		</form>
+		</div>
+		<form method="link" action="AdminUI.php">
+		<input type="submit" name="next" class="button large" value="Cancel">
+		</form>
+		<br>
 	</div>
 	</div>
-	</form>
-	<br>
-	<br>
-	<form method="link" action="AdminUI.php">
-	<input type="submit" name="next" class="button large go" value="Return to Home">
-	</form>
-	<?php include('./workOrder/workButton.php'); ?>
-
+	<?php
+		include('./footer.php');
+	?>
+	</div>
   </body>
   
 </html>
+
+

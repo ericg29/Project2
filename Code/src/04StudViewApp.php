@@ -1,6 +1,6 @@
 <?php
 session_start();
-$studid = $_SESSION["studID"];
+$studID = $_SESSION["studID"];
 ?>
 
 <html lang="en">

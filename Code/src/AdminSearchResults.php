@@ -1,8 +1,5 @@
 <?php
 session_start();
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug); 
 ?>
 
 <!DOCTYPE html>
@@ -19,11 +16,26 @@ $COMMON = new Common($debug);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+	<div class="container">
+		<?php
+			include('./header.php');
+		?>
+		<div class="container admin">
+		<div id="nav">
+			<form action="AdminProcessUI.php" method="post" name="UI">
+		  
+				<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
+				<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+				<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
+				<div class="button selected">Search for an appointment</div><br>
+				<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+			
+			</form>
+		</div>
+		<div id="section">
+			<div class="top">
 			<h1>Search results</h1>
-			<div class="field">
+			<div class="field small">
 			<p>Showing results for: </p>
 			<?php
 				$date = $_POST["date"];
@@ -79,7 +91,7 @@ $COMMON = new Common($debug);
 				elseif($filter == 0){ echo "Filter: Open appointments"; }
 				elseif($filter == 1){ echo "Filter: Closed appointments"; }
 				?>
-				<br><br><label>
+				<br><br><div class="appInfo">
 				<?php
 				$sql = "select * from Proj2Appointments where `Time` like '%$date%' and";
 				//add the following to the query depending on what conditions are met
@@ -116,7 +128,7 @@ $COMMON = new Common($debug);
 							}
 							//replace abbreviations with full major names
 							$majors = $row[3];
-							if ($majors == 'CMPE CMSC MENG CENG ENGR')
+							if (trim($majors) == 'CMPE CMSC MENG CENG ENGR')
 							{
 								$majors = "All";
 							}
@@ -130,12 +142,12 @@ $COMMON = new Common($debug);
 							}
 							
 							//create entry for array of matching appts
-							$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])). 
-									"<br>Advisor: ". $advName. 
-									"<br>Major: ". $majors. 
-									"<br>Enrolled Students: ". $row[4]. 
-									"<br>Number of enrolled student(s): ". $row[5]. 
-									"<br>Maximum number of students allowed: ". $row[6]. "<br><br>";
+							$found = "<b>Time</b>: ". date('l, F d, Y g:i A', strtotime($row[1])). 
+									"<br><b>Advisor</b>: ". $advName. 
+									"<br><b>Major</b>: ". $majors. 
+									"<br><b>Enrolled Students</b>: ". $row[4]. 
+									"<br><b>Number of enrolled student(s)</b>: ". $row[5]. 
+									"<br><b>Maximum number of students allowed</b>: ". $row[6]. "<br><br>";
 							array_push($results, $found);
 						}
 					}
@@ -162,7 +174,7 @@ $COMMON = new Common($debug);
 								}
 								//replace abbreviations with full major names
 								$majors = $row[3];
-								if ($majors == 'CMPE CMSC MENG CENG ENGR')
+								if (trim($majors) == 'CMPE CMSC MENG CENG ENGR')
 								{
 									$majors = "All";
 								}
@@ -175,12 +187,12 @@ $COMMON = new Common($debug);
 									$majors =  str_replace("ENGR", "Engineering Undecided", $majors);
 								}
 								//create entry for array of results
-								$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])). 
-										"<br>Advisor: ". $advName. 
-										"<br>Major: ". $majors. 
-										"<br>Enrolled Students: ". $row[4]. 
-										"<br>Number of enrolled student(s): ". $row[5]. 
-										"<br>Maximum number of students allowed: ". $row[6]. "<br><br>";
+								$found = "<b>Time</b>: ". date('l, F d, Y g:i A', strtotime($row[1])). 
+										"<br><b>Advisor</b>: ". $advName. 
+										"<br><b>Major</b>: ". $majors. 
+										"<br><b>Enrolled Students</b>: ". $row[4]. 
+										"<br><b>Number of enrolled student(s)</b>: ". $row[5]. 
+										"<br><b>Maximum number of students allowed</b>: ". $row[6]. "<br><br>";
 								array_push($results, $found);
 							}
 						}
@@ -195,20 +207,23 @@ $COMMON = new Common($debug);
 					}
 				}
 				?>
-				</label>
-		<form method="link" action="AdminUI.php" name="home">
-			<input type="submit" name="next" class="button large go" value="Return to Home">
-		</form>
+				</div>
+				<p style="font-size: 14px">If the Major category is followed by a blank, then it is open for all majors.</p>
+			</div>
+			</div>		
+			<form method="link" action="AdminUI.php" name="home">
+				<input type="submit" name="next" class="button large go" value="Return to Home">
+			</form>
+			<br>
+		</div>
+		</div>
+		<?php
+			include('./footer.php');
+		?>
 	</div>
-	</div>
-	</div>
-	<div class="bottom">
-		<p>If the Major category is followed by a blank, then it is open for all majors.</p>
-	</div>
-	<?php include('./workOrder/workButton.php'); ?>
-
-	</div>
-	</form>
   </body>
   
 </html>
+
+
+        

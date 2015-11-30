@@ -1,8 +1,5 @@
 <?php
 session_start();
-$debug = false;
-include('../CommonMethods.php');
-$COMMON = new Common($debug);
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +9,23 @@ $COMMON = new Common($debug);
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
+	<div class="container">
+		<?php
+			include('./header.php');
+		?>
+		<div class="container admin">
+		<div id="nav">
+			<form action="AdminProcessUI.php" method="post" name="UI">
+		  
+				<div class="button selected">Schedule appointments</div><br>
+				<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+				<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
+				<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
+				<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+			
+			</form>
+		</div>
+		<div id="section">
         <div class="top">
           <h2>Appointments Created</h2><br>
           <?php
@@ -69,23 +81,27 @@ $COMMON = new Common($debug);
             }
           }
           
-          //major stuff
-          $majorDB = "";
-          $majorPrint = "All";
-          if(!empty($majors)){
-            $majorPrint = "";
-            foreach($majors as $m){
-				$majorDB .= $m . " ";
-				$majorPrint .= $m . ", ";
-            }
-            $majorPrint = substr($majorPrint, 0, -2);
-			//convert abbreviations to full names
-			$majorPrint = str_replace("CMPE", "Computer Engineering", $majorPrint);
-			$majorPrint =  str_replace("CENG", "Chemical Engineering", $majorPrint);
-			$majorPrint =  str_replace("MENG", "Mechanical Engineering", $majorPrint);
-			$majorPrint =  str_replace("CMSC", "Computer Science", $majorPrint);
-			$majorPrint =  str_replace("ENGR", "Engineering Undecided", $majorPrint);
-          }
+			//major stuff
+			$majorDB = "";
+			$majorPrint = "";
+			if(!empty($majors)){
+					foreach($majors as $m){
+						$majorDB .= $m . " ";
+						$majorPrint .= $m . " ";
+					}
+				if (trim($majorPrint) == 'CMPE CMSC MENG CENG ENGR')
+				{
+					$majorPrint = "All<br>";
+				}
+				else{
+					$majorPrint = "<br>".$majorPrint;
+					$majorPrint = str_replace("CMPE", "<label style='margin-left:30px;'>Computer Engineering</label><br>", $majorPrint);
+					$majorPrint =  str_replace("CENG", "<label style='margin-left:30px;'>Chemical Engineering</label><br>", $majorPrint);
+					$majorPrint =  str_replace("MENG", "<label style='margin-left:30px;'>Mechanical Engineering</label><br>", $majorPrint);
+					$majorPrint =  str_replace("CMSC", "<label style='margin-left:30px;'>Computer Science</label><br>", $majorPrint);
+					$majorPrint =  str_replace("ENGR", "<label style='margin-left:30px;'>Engineering Undecided</label><br>", $majorPrint);
+				}
+			}
           
           //get advisor id
           $User = $_SESSION["UserN"];
@@ -102,8 +118,10 @@ $COMMON = new Common($debug);
             $sql = "SELECT * from `Proj2Appointments` where `Time` = '$dt' and `AdvisorID` = '0'";
             $rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
             $row = mysql_fetch_row($rs);
-            echo date('l, F d, Y g:i A', strtotime($dt)), "<br>Majors included: ", $majorPrint;
-            echo("<br>Number of seats: $studentLimit");
+			echo("<div class=\"appInfo\">");
+			echo("<b>Date</b>: ");
+            echo date('l, F d, Y g:i A', strtotime($dt)), "<br><b>Majors included</b>: ", $majorPrint;
+            echo("<b>Number of seats</b>: $studentLimit");
             if($row){
               echo "<br><span style='color:red'>!!</span>";
             }
@@ -111,19 +129,26 @@ $COMMON = new Common($debug);
               $sql = "insert into Proj2Appointments (`Time`, `AdvisorID`, `Major`, `Max`) values ('$dt', '0', '$majorDB','$studentLimit')";
               $rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
             }
-            echo "<br><br>";
+            echo "<br></div>";
           }
         ?>
         <br>
-        <form method="link" action="AdminUI.php">
-          <input type="submit" name="next" class="button large go" value="Return to Home">
-        </form>
-      </div>
-      <div class="bottom">
-        <p><span style="color:red">!!</span> indicates that this appointment already exists. A repeat appointment was not made.</p>
-      </div>
-	</div>
-	</form>
-  </body>
-  
+        <p style="font-size: 14px"><span style="color:red">!!</span> indicates that this appointment already exists. A repeat appointment was not made.</p>
+		</div>
+		<div class="bottom">
+			<form method="link" action="AdminUI.php">
+				<input type="submit" name="next" class="button large go" value="Return to Home">
+			</form>
+		</div>
+		<br>
+		</div>
+		</div>
+	<?php
+		include('./footer.php');
+	?>
+	</div>  
+  </body> 
 </html>
+
+
+

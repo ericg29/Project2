@@ -1,27 +1,36 @@
-Added comments to all files where applicable.
-
-
 ------CSS CHANGES------
 
 standard.css:
-	Added fade transition for hovering over buttons and text
+EG	Added fade transition for hovering over buttons and text
 	Restyled buttons on main page
 	
 
 ------CODE CHANGES------	
-All html and mixed php/html files:
-	Implemented new styling
+All html and mixed php/html files: 
+EG	Implemented new styling
 	removed 'include commonmethods.php' and declaration of $COMMON and $debug
 	included header.php and footer.php
+	
+	
+AdminConfirmEditGroupApp.php:
+EG	fixed php code to correctly identify app to be deleted
+	
+AdminConfirmEditIndApp.php:
+EG	fixed php code to correctly identify app to be deleted
+	
 
 	
 ------ADDED FILES------
 
 header.php:
-	includes logout button, username message
+EG	includes logout button, username message
 	'include's commonmethods.php and declares $COMMON and $debug
-	checks status for studExist, adminCancel, and noApp
+	checks status for admin, studExist, adminCancel, and noApp
 
+footer.php:
+EG	includes umbc logo, copyright notice, university address
+	shows links for COEIT site, advising site, and advisor contact page
+	if admin==true, displays workOrder button
 	
 
 ------DATABASE CHANGES------

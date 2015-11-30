@@ -16,16 +16,17 @@ session_start();
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head> 
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+<div class="container">
+	<?php
+		include('./header.php');
+	?>
+	<div class="container admin">
+	<div id="sectionFullLarge">
+	<div class="top">
           <h2>Select which appointment you would like to change: </h2>
 		  <div class="field">
 		  
           <?php
-            $debug = false;
-            include('../CommonMethods.php');
-            $COMMON = new Common($debug);
 
 			//query: get all indiviual appointments after the current time/date
             $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` != '0' and `Time` > '".date('Y-m-d H:i:s')."' ORDER BY `Time`";
@@ -36,25 +37,25 @@ session_start();
               echo("<form action=\"AdminConfirmEditInd.php\" method=\"post\" name=\"Confirm\">");
               
 
-	echo("<table border='1px' width=598px>\n<tr>");
-	echo("<tr><td width='320px'>Time</td><td width=155px>Majors</td><td>Enrolled</td></tr>\n");
+			echo("<table border='1px' width=896px>\n<tr>");
+			echo("<tr><td width='50%'>Time</td><td width=25%>Majors</td><td>Enrolled</td></tr>\n");
 
-			  //query: get the advisor's name
-              $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
-              $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
-              $secrow = mysql_fetch_row($secrs);
+			//query: get the advisor's name
+			$secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
+			$secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
+			$secrow = mysql_fetch_row($secrs);
 
-              if($row[4]){
-				//query: get the name of the student from the appointment
-                $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
-                $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
-                $trdrow = mysql_fetch_row($trdrs);
-              }
+			if($row[4]){
+			  //query: get student's name
+			  $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
+			  $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
+			  $trdrow = mysql_fetch_row($trdrs);
+			}
 
-			  //display the radio button to select this appointment
-              echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
-                required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-              echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
+			//display radio button for this appointment
+			echo("<tr><td><label style=\"font-weight:normal\" for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
+			  required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
+			echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
               
 			  //display the majors for this appointment
 			  if($row[3]){
@@ -65,20 +66,20 @@ session_start();
 				$majors =  str_replace("MENG", "Mechanical Engineering<br>", $majors);
 				$majors =  str_replace("CMSC", "Computer Science<br>", $majors);
 				$majors =  str_replace("ENGR", "Engineering Undecided<br>", $majors);
-                echo("<td>$majors</td>"); 
+                echo("<td><label style=\"font-weight:normal\">$majors</label></td>"); 
               }
               else{
-                echo("Available to all majors"); 
+                  echo("<td><label style=\"font-weight:normal\">Available to all majors</label></td>"); 
               }
               
 			  //display student ID (if it exists)
               if($row[4]){
-                echo("<td>$trdrow[0] $trdrow[1]</td>");
+                echo("<td><label style=\"font-weight:normal\">$trdrow[0] $trdrow[1]</label></td>");
               }
               else{
-                echo("<td>Empty</td>");
+                echo("<td><label style=\"font-weight:normal\">Empty</label></td>");
               }
-			  echo("</tr>\n");
+			  echo("</label style=\"font-weight:normal\"></tr>\n");
 
               
 			  //rest of items in row
@@ -96,7 +97,7 @@ session_start();
                 }
 
 				//display radio button for this appointment
-                echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
+                echo("<tr><td><label style=\"font-weight:normal\" for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
                   required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
                 echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
 				
@@ -109,18 +110,18 @@ session_start();
 					$majors =  str_replace("MENG", "Mechanical Engineering<br>", $majors);
 					$majors =  str_replace("CMSC", "Computer Science<br>", $majors);
 					$majors =  str_replace("ENGR", "Engineering Undecided<br>", $majors);
-					echo("<td>$majors</td>"); 
+					echo("<td><label style=\"font-weight:normal\">$majors</label></td>"); 
                 }
                 else{
-                  echo("Available to all majors"); 
+                  echo("<td></label style=\"font-weight:normal\">Available to all majors</label></td>"); 
                 }
 
                 //display student ID (if it exists)
                 if($row[4]){	
-                  echo("<td>$trdrow[0] $trdrow[1]</td>");
+                  echo("<td><label style=\"font-weight:normal\">$trdrow[0] $trdrow[1]</label</td>");
                 }
                 else{
-                  echo("<td>Empty</td>");
+                  echo("<td><label style=\"font-weight:normal\">Empty</label></td>");
                 }
 				echo("</tr>\n");
 		
@@ -128,33 +129,30 @@ session_start();
 				
               }
               echo("</table>");
-
+			  echo("<label style='color:red; margin-top:10px;'>Please note that individual appointments can only be removed from schedule.</label></br>");
               echo("<div class=\"nextButton\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
-              echo("</div>");
 			  echo("</form>");
+              echo("</div>");
+              echo("</div>");
+              echo("</div>");
 			  echo("<form method=\"link\" action=\"AdminUI.php\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large\" value=\"Cancel\">");
               echo("</form>");
             }
             else{
               echo("<br><b>There are currently no individual appointments scheduled at the current moment.</b>");
-              echo("<br><br>");
-			  echo("</td</tr>");
+              echo("<br><br></div></div>");
               echo("<form method=\"link\" action=\"AdminUI.php\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
               echo("</form>");
             }
-          ?>
-		  
-	</div>
-	</div>
-	<div class="bottom">
-		<p style='color:red'>Please note that individual appointments can only be removed from schedule.</p>
-	</div>
-	</div>
-	<?php include('./workOrder/workButton.php'); ?>
-
+			?>
+		</div>
+		</div>
+		<?php
+			include('./footer.php');
+		?>
 	</div>
   </body>
   

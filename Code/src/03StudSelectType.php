@@ -37,7 +37,7 @@ session_start();
 		<h1>Schedule Appointment</h1>
 		<h2>What kind of advising appointment would you like?</h2><br>
 	<form action="StudProcessType.php" method="post" name="SelectType" style="text-align: center;">
-	<div class="nextButton" style="text-algin: center;">
+	<div class="nextButton" style="text-align: center;">
 		<input type="submit" name="type" class="button large go" value="Individual" style="margin-right: 60px;">
 		<input type="submit" name="type" class="button large go" value="Group">
 	    </div>

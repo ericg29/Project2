@@ -16,45 +16,62 @@
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/> 
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
-		<h2>New Advisor has been created:</h2>
-
+	<div class="container">
 		<?php
-			$first = $_SESSION["AdvF"];
-			$last = $_SESSION["AdvL"];
-			$user = $_SESSION["AdvUN"];
-			$pass = $_SESSION["AdvPW"];
-			$room = $_SESSION["AdvRN"];
-
-			include('../CommonMethods.php');
-			$debug = false;
-			$Common = new Common($debug);
-	
-	  //query: Get advisor with given username, name, and location
-      $sql = "SELECT * FROM `Proj2Advisors` WHERE `Username` = '$user' AND `FirstName` = '$first' AND  `LastName` = '$last' AND  `room` = '$room'";
-      $rs = $Common->executeQuery($sql, "Advising Appointments");
-      $row = mysql_fetch_row($rs);
-	  //check if the user exists
-      if($row){
-        echo("<h3>Advisor $first $last already exists</h3>");
-      }
-      else{
-			//query: insert new advisor with given info
-  			$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`, `Room`) 
-  			VALUES ('$first', '$last', '$user', '$pass', '$room')";
-        echo ("<h3>$first $last<h3>");
-        $rs = $Common->executeQuery($sql, "Advising Appointments");
-      }
+			include('./header.php');
 		?>
-		<form method="link" action="AdminUI.php">
-			<input type="submit" name="next" class="button large go" value="Return to Home">
-		</form>
+		<div class="container admin">
+		<div id="nav">
+			<form action="AdminProcessUI.php" method="post" name="UI">
+		  
+				<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
+				<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+				<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
+				<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
+				<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+			
+			</form>
+		</div>
+		<div id="section">
+			<div class="top">
+				<h2>New Advisor has been created:</h2>
+				<br>
+				<div style='text-align: center;'>
+				<?php
+					$first = $_SESSION["AdvF"];
+					$last = $_SESSION["AdvL"];
+					$user = $_SESSION["AdvUN"];
+					$pass = $_SESSION["AdvPW"];
+					$room = $_SESSION["AdvRN"];
+			
+					//query: Get advisor with given username, name, and location
+					$sql = "SELECT * FROM `Proj2Advisors` WHERE `Username` = '$user' AND `FirstName` = '$first' AND  `LastName` = '$last' AND  `room` = '$room'";
+					$rs = $COMMON->executeQuery($sql, "Advising Appointments");
+					$row = mysql_fetch_row($rs);
+					//check if the user exists
+					if($row){
+						echo("<p style='font-size: 16px;'>Advisor $first $last already exists</p>");
+					}
+					else{
+						//query: insert new advisor with given info
+						$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`, `Room`) 
+						VALUES ('$first', '$last', '$user', '$pass', '$room')";
+						echo ("<p style='font-size: 16px;'>$first $last<p>");
+						$rs = $COMMON->executeQuery($sql, "Advising Appointments");
+					}
+				?>
+				</div>
+				<br>
+			</div>
+			<form method="link" action="AdminUI.php">
+				<input type="submit" name="next" class="button large go" value="Return to Home">
+			</form>
+		</div>
+		</div>
+		<?php
+			include('./footer.php');
+		?>
 	</div>
-	</div>
-	</div>
-	</form>
   </body>
   
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["admin"] = true;
 ?>
 
 <!DOCTYPE html>
@@ -10,18 +11,19 @@ session_start();
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
-		<h1>UMBC COEIT Engineering and Computer Science Advising</h1>
-		<h2>Admin Sign In</h2>
+  <div class="container" style="min-height: 300px">
+	<div id="header"><div><h3 style="position: relative; top: 5px;">This works best using any browser <u>OTHER</u> than Internet Explorer.</h3></div></div>
+	<div class="container main" style="top: 0px; min-height: 300px;">
+	<div id="sectionFull" style="min-height: 300px;">
+<h1>COEIT Engineering and Computer Science Advising</h1>
+		<h2>Admin Sign In</h2><br>
+<form action="AdminProcessSignIn.php" method="POST" name="SignIn">        
 
-    <?php
-      if($_SESSION["UserVal"] == true){
-        echo "<h3 style='color:red'>Invalid Username/Password combination</h3>";
-      }
-    ?>
-        <form action="AdminProcessSignIn.php" method="POST" name="SignIn">
+		<?php
+		  if($_SESSION["UserVal"] == true){
+			echo "<h3 style='color:red; float:left;'>Invalid Username/Password combination</h3><br>";
+		  }
+		?>
 
 	    <div class="field">
 	      <label for="UserN">Username</label>
@@ -36,8 +38,17 @@ session_start();
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Next">
 	    </div>
-	</div>
+		<br>
 	</form>
+	</div>
+	</div>
+	<?php
+		include('./footer.php');
+	?>
+	</div>
+  
+  
   </body>
   
 </html>
+        

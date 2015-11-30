@@ -1,7 +1,5 @@
 <?php
 session_start();
-$debug = false;
-
 ?>
 
 <!DOCTYPE html>
@@ -18,39 +16,50 @@ $debug = false;
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
-		<div class="field">
+    	<div class="container">
+	<?php
+		include('./header.php');
+	?>
+	<div class="container admin">
+	<div id="nav">
+		<form action="AdminProcessUI.php" method="post" name="UI">
+	  
+			<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
+			<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+			<div class="button selected">Edit appointments</div><br>
+			<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
+			<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+		
+		</form>
+	</div>
+	<div id="section">
+	<div class="top">
         <?php
           $delete = $_SESSION["Delete"];
           $group = $_SESSION["GroupApp"];
           parse_str($group);
- 
-          include('../CommonMethods.php');
-          $COMMON = new Common($debug);
 
 		  //if the appt was deleted
           if($delete == true){
             echo("<h1>Removed Appointment</h1><br>");
+			echo("<div class=\"appInfo\">");
 			
 			//get the IDs of the students enrolled in the cancelled appt
-            $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = '$row[0]'
+            $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = '$row[1]'
               AND `AdvisorID` = '0' 
-              AND `Major` = '$row[1]' 
-              AND `EnrolledNum` = '$row[2]'
-              AND `Max` = '$row[3]'";
+              AND `Major` = '$row[2]' 
+              AND `EnrolledNum` = '$row[3]'
+              AND `Max` = '$row[4]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-            $stds = mysql_fetch_row($rs);
-	echo($stds[0]);
+           $stds = mysql_fetch_row($rs);
 	    $stds = trim($stds[0]); // had some side white spaces sometimes
 	    $stds = split(" ", $stds);
 
             if($debug) { var_dump("\n<BR>EMAILS ARE: $stds \n<BR>"); }
 		// foreach($stds as $element) { echo("->".$element."\n"); }
 
-            if($stds)
+        if($row[3] > 0)
 	    {
 
 			//update the student database to show that their appts were cancelled
@@ -67,42 +76,48 @@ $debug = false;
 				//send an email notifying students that their appt was cancelled
                 $eml = $ros[0];
                 $message = "The following group appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
-                "Time: $row[0]" . "\r\n" . 
+                "Time: $row[1]" . "\r\n" . 
                 "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage." . "\r\n" .
 		"http://coeadvising.umbc.edu  -> COEIT Advising Scheduling \r\n Reminder, this is only accessible on campus."; 
                 mail($eml, "Your COE Advising Appointment Has Been Deleted", $message);
               }
             }
 			//delete the appt
-            $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[0]' 
+            $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[1]' 
               AND `AdvisorID` = '0' 
-              AND `Major` = '$row[1]' 
-              AND `EnrolledNum` = '$row[2]'
-              AND `Max` = '$row[3]'";
+              AND `Major` = '$row[2]' 
+              AND `EnrolledNum` = '$row[3]'
+              AND `Max` = '$row[4]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
-            echo("Majors included: ");
+            echo("<b>Time</b>: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
+            echo("<b>Majors included</b>: ");
 
-            if($row[1]){ 
+            if($row[2]){
 				//replace abbreviations with full major names
-				$majors = $row[1];
-				$majors = str_replace("CMPE", "Computer Engineering", $majors);
-				$majors =  str_replace("CENG", "Chemical Engineering", $majors);
-				$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
-				$majors =  str_replace("CMSC", "Computer Science", $majors);
-				$majors =  str_replace("ENGR", "Engineering Undecided", $majors);
-			echo("$majors<br>"); 
-			}
+				$majors = $row[2];
+ 				if (trim($majors) == 'CMPE CMSC MENG CENG ENGR')
+				{
+					echo("All<br>"); 
+				}
+				else
+				{
+					$majors = str_replace("CMPE", "<label style='margin-left:30px;'>Computer Engineering</label><br>", $majors);
+					$majors =  str_replace("CENG", "<label style='margin-left:30px;'>Chemical Engineering</label><br>", $majors);
+					$majors =  str_replace("MENG", "<label style='margin-left:30px;'>Mechanical Engineering</label><br>", $majors);
+					$majors =  str_replace("CMSC", "<label style='margin-left:30px;'>Computer Science</label><br>", $majors);
+					$majors =  str_replace("ENGR", "<label style='margin-left:30px;'>Engineering Undecided</label><br>", $majors);
+					echo("<br>$majors"); 
+				}
+            }
             else{ echo("Available to all majors<br>"); }
 
-            echo("Number of students enrolled: $row[2]<br>");
-            echo("Student limit: $row[3]");
-            echo("<br><br>");
+            echo("<b>Number of students enrolled</b>: $row[3]<br>");
+            echo("<b>Student limit</b>: $row[4]");
+			echo("</div><br></div>");
             echo("<form method=\"link\" action=\"AdminUI.php\">");
             echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
             echo("</form>");
-            echo("</div>");
             echo("<div class=\"bottom\">");
             if($stds[0]){
               echo "<p style='color:red'>Students have been notified of the cancellation.</p>";
@@ -113,11 +128,12 @@ $debug = false;
             echo("<h1>Changed Appointment</h1><br>");
 			//display the old appt
 			echo("<h2>Previous Appointment:</h2>");
-            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
-            echo("Majors included: ");
-            if($row[1]){ 
+			echo("<div class=\"appInfo\">");
+            echo("<b>Time</b>: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
+            echo("<b>Majors included</b>: ");
+            if($row[2]){ 
 				//replace abbreviations with full major names
-				$majors = $row[1];
+				$majors = $row[2];
 				$majors = str_replace("CMPE", "Computer Engineering", $majors);
 				$majors =  str_replace("CENG", "Chemical Engineering", $majors);
 				$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
@@ -128,16 +144,18 @@ $debug = false;
             else{
               echo("Available to all majors<br>"); 
             }
-            echo("Number of students enrolled: $row[2]<br>");
-            echo("Student limit: $row[3]");
+            echo("<b>Number of students enrolled</b>: $row[3]<br>");
+            echo("<b>Student limit</b>: $row[4]");
+			echo("</div>");
 			//display the new appt
             echo("<h2>Updated Appointment:</h2>");
             $limit = $_POST["stepper"];
-            echo("<b>Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "</b><br>");
-            echo("<b>Majors included: ");
-            if($row[1]){ 
+			echo("<div class=\"appInfo\">");
+            echo("<b>Time: </b>". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
+            echo("<b>Majors included: </b>");
+            if($row[2]){ 
 				//replace abbreviations with full major names
-				$majors = $row[1];
+				$majors = $row[2];
 				$majors = str_replace("CMPE", "Computer Engineering", $majors);
 				$majors =  str_replace("CENG", "Chemical Engineering", $majors);
 				$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
@@ -146,27 +164,30 @@ $debug = false;
 			echo("$majors<br>"); 
 			}
             else{
-              echo("Available to all majors</b><br>"); 
+              echo("Available to all majors<br>"); 
             }
-            echo("<b>Number of students enrolled: $row[2] </b><br>");
-            echo("<b>Student limit: $limit</b>");
+            echo("<b>Number of students enrolled</b>: $row[3] <br>");
+            echo("<b>Student limit</b>: $limit");
 
 			//update the max limit in the selected appointment
-            $sql = "UPDATE `Proj2Appointments` SET `Max`='$limit' WHERE `Time` = '$row[0]' 
-                    AND `AdvisorID` = '$0' AND `Major` = '$row[1]' 
-                    AND `EnrolledNum` = '$row[2]' AND `Max` = '$row[3]'";
+            $sql = "UPDATE `Proj2Appointments` SET `Max`='$limit' WHERE `Time` = '$row[1]' 
+                    AND `AdvisorID` = '$0' AND `Major` = '$row[2]' 
+                    AND `EnrolledNum` = '$row[3]' AND `Max` = '$row[4]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments"); 
-
-            echo("<br><br>");
+			echo("</div><br></div>");
             echo("<form method=\"link\" action=\"AdminUI.php\">");
             echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
             echo("</form>");
           }
         ?>
+	  </div>
+	 
 	</div>
 	</div>
+	<?php
+		include('./footer.php');
+	?>
 	</div>
-	</form>
   </body>
   
 </html>

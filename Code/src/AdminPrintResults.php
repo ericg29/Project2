@@ -1,6 +1,9 @@
 <?php
 session_start();
 $debug = false;
+
+include('../CommonMethods.php');
+$COMMON = new Common($debug);
 ?>
 
 <!DOCTYPE html>
@@ -17,57 +20,54 @@ $debug = false;
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head>
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+	<div id="containerPrint">
 
-<?php
-	//get variables
-	$date = $_POST["date"];
-	$type = $_POST["type"];
-			
-	include('../CommonMethods.php');
-	$COMMON = new Common($debug);
+			<?php
+				//get variables
+				$date = $_POST["date"];
+				$type = $_POST["type"];
 
+				  $User = $_SESSION["UserN"];
 
-      $User = $_SESSION["UserN"];
+				  //get advisor ID and name
+				  $sql = "SELECT `id`, `firstName`, `lastName` FROM `Proj2Advisors` WHERE `Username` = '$User'";
+				  $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+				  $row = mysql_fetch_row($rs);
+				  $id = $row[0];
+				  $FirstName = $row[1];
+				  $LastName = $row[2];
+					
+				  //display name and get date
+				  echo("<h2>Schedule for $FirstName $LastName<br>$date</h2>");
+				  $date = date('Y-m-d', strtotime($date));
 
-	  //get advisor ID and name
-      $sql = "SELECT `id`, `firstName`, `lastName` FROM `Proj2Advisors` WHERE `Username` = '$User'";
-      $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-      $row = mysql_fetch_row($rs);
-      $id = $row[0];
-      $FirstName = $row[1];
-      $LastName = $row[2];
-		
-	  //display name and get date
-	  echo("<h2>Schedule for $FirstName $LastName<br>$date</h2>");
-      $date = date('Y-m-d', strtotime($date));
+				//display the requested appt types
+				if($_POST["type"] == 'Both')
+				{
+					displayGroup($id, $date);
+					displayIndividual($id, $date);
+				}
+				elseif($_POST["type"] == 'Individual') { displayIndividual($id, $date); }
+				elseif($_POST["type"] == 'Group') { displayGroup($id, $date); }
+				else { echo("Selection invalid"); }
 
-	//display the requested appt types
-	if($_POST["type"] == 'Both')
-	{
-		displayGroup($id, $date);
-		displayIndividual($id, $date);
-	}
-	elseif($_POST["type"] == 'Individual') { displayIndividual($id, $date); }
-	elseif($_POST["type"] == 'Group') { displayGroup($id, $date); }
-	else { echo("Selection invalid"); }
-
-?>
-	<form method="link" action="AdminUI.php">
-	<input type="submit" name="next" class="button large go" value="Return to Home">
-	<input type="button" name="print" class="button large go" value="Print" onClick="window.print()">
-	</form>
+			?>
+				<form method="link" action="AdminUI.php">
+				<input type="submit" name="next" class="button large go" value="Return to Home">
+				<input type="button" name="print" class="button large go" value="Print" onClick="window.print()">
+				</form>
 
 	</div>
-	</div>
-	<?php include('./workOrder/workButton.php'); ?>
-	</div>
-
   </body>
   
 </html>
+
+
+
+
+
+
+
 
 
 <?php
@@ -93,9 +93,9 @@ function displayGroup($id, $date)
 	if($debug) { echo("matches was $matches"); }
 	if($matches == 0) { return; }
 
-	echo("<h3>Group Appointments:</h3>");
-	echo("<table border='1'><th colspan='4'>Group Appointments</th>\n");
-	echo("<tr><td width='60px'>Time:</td><td>Majors Included:</td><td>students enrolled</td><td>Number of seats</td></tr>\n");
+	echo("<div class='appInfo' style='font-size:16px'>");
+	echo("<table width='640px' border='1'><th colspan='4'><h2>Group Appointments</h></th>\n");
+	echo("<tr><td width='15%'><b>Time:</td><td width='38%'><b>Majors Included:</b></td><td width='27%'><b>Students enrolled</b></td><td width='10%'><b>Number of seats</b></td></tr>\n");
 
 	//print the table of appointments
 	while ($row = mysql_fetch_array($rs, MYSQL_NUM)) 
@@ -108,11 +108,11 @@ function displayGroup($id, $date)
 		}
 		else
 		{
-			$majors = str_replace("CMPE", "Computer Engineering", $majors);
-			$majors =  str_replace("CENG", "Chemical Engineering", $majors);
-			$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
-			$majors =  str_replace("CMSC", "Computer Science", $majors);
-			$majors =  str_replace("ENGR", "Engineering Undecided", $majors);
+			$majors = str_replace("CMPE", "Computer Engineering<br>", $majors);
+			$majors =  str_replace("CENG", "Chemical Engineering<br>", $majors);
+			$majors =  str_replace("MENG", "Mechanical Engineering<br>", $majors);
+			$majors =  str_replace("CMSC", "Computer Science<br>", $majors);
+			$majors =  str_replace("ENGR", "Engineering Undecided<br>", $majors);
 		}
 		echo("<tr>");
 		//print date/time
@@ -139,10 +139,10 @@ function displayIndividual($id, $date)
 	$matches = mysql_num_rows($rs); // see how many rows were collected by the query
 	if($debug) { echo("matches was $matches"); }
 	if($matches == 0) { return; }
-
-	echo("<h3>Individual Appointments:</h3>");
-	echo("<table border='1'><th colspan='4'>Individual Appointments</th>\n");
-	echo("<tr><td width='60px'>Time:</td><td>Majors Included:</td><td>Student's name</td><td>Student ID</td></tr>\n");
+	
+	echo("<div class='appInfo' style='font-size:15px'>");
+	echo("<table width='640px' border='1'><th colspan='4'><h2>Individual Appointments</h2></th>\n");
+	echo("<tr><td width='15%'><b>Time:</b></td><td width=30%><b>Majors Included:</b></td><td width=25%><b>Student's name</b></td><td width=15%><b>Student ID</b></td></tr>\n");
 	
 	//print each appt into the table
         while ($row = mysql_fetch_array($rs, MYSQL_NUM)) 
@@ -171,6 +171,6 @@ function displayIndividual($id, $date)
 		echo("<td>".$row[2]."</td>");
 		echo("</tr>");
 	}
-        echo("</table><br><br>");
+        echo("</table></div><br><br>");
 }
 ?>

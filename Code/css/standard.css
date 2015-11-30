@@ -20,6 +20,17 @@ html{
 		padding: 0px;
 		margin: 50px auto 40px;
 	}
+	
+	
+	#containerPrint {
+		background-color: #FFF;
+		max-width: 640px;
+		min-height: 640px;
+		height: auto;
+		overflow: auto;
+		padding: 30px;
+		margin: 10px auto 10px;
+	}
 
 	#header { 
 		background-color: #F5CA5C;
@@ -41,6 +52,14 @@ html{
 		margin: 0px;
 		position: relative;
 		top: -15px;
+	}
+	
+	.container.admin {
+		width: 960px;
+		min-height: 525px;
+		overflow: hidden;
+		margin: 0px;
+		position: relative;
 	}
 	
 	#nav {
@@ -288,7 +307,6 @@ html{
 		font-size: 20px;
 		height: 32px;
 		padding: 0 16px;
-		position: center;
 	}
 
 	.button.go {
@@ -307,6 +325,7 @@ html{
 		width: 370px;
 		-moz-border-radius: 0px;
 		-webkit-border-radius: 0px;
+		border-radius: 0px;
 		border-bottom: 1px solid #000;
 		margin: 0 auto 0;
 		transition: padding-left 0.33s, background-color 0.33s;
@@ -323,10 +342,11 @@ html{
 		width: 320px;
 		-moz-border-radius: 0px;
 		-webkit-border-radius: 0px;
+		border-radius: 0px;
 		border-bottom: 1px solid #000;
 		margin: 0 auto 0;
 		background-color: #97A2AD;
-		padding: 15px 0px 15px 50px;
+		padding: 17px 0px 12px 50px;
 	}
 	
 	.button.logout{
@@ -334,6 +354,7 @@ html{
 		float: right;
 		-moz-border-radius: 0px;
 		-webkit-border-radius: 0px;
+		border-radius: 0px;
 		border-top-right-radius: 8px;
 		border-left: 1px solid black;
 		margin-top: 0px;
@@ -346,6 +367,10 @@ html{
 	
 	.field{ 
 		margin: 8px 0; 
+	}
+	
+	.field.small {
+		font-size: 16px;
 	}
 
 	.field label{ 
@@ -394,9 +419,32 @@ html{
 	}
 	
 	.appInfo {
-		margin: 15px;
+		font-size: 14px; 
 		padding-bottom: 15px;
 		padding-top: 15px;
+	}
+	
+	.workOrder {
+		border: 0px;
+		height: 42px;
+		width: 42px;
+		float: right; 
+		padding: 7px;
+		cursor: pointer; 
+		display: inline;
+		position: relative;
+		top: -60px;
+		right: 0px;
+	}
+	
+	.studFooter {
+		margin-top: 7px; 
+	}
+	
+	.adminFooter {
+		margin-top: 7px; 
+		position: relative;  
+		right: 45px;
 	}
 	
 
