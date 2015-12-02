@@ -1,0 +1,63 @@
+------CSS CHANGES------
+
+standard.css:
+EG	Added fade transition for hovering over buttons and text
+	Restyled buttons on main page
+	
+
+------CODE CHANGES------	
+All html and mixed php/html files: 
+EG	Implemented new styling
+	removed 'include commonmethods.php' and declaration of $COMMON and $debug
+	included header.php and footer.php
+	
+	
+AdminConfirmEditGroupApp.php:
+EG	fixed php code to correctly identify app to be deleted
+	
+AdminConfirmEditIndApp.php:
+EG	fixed php code to correctly identify app to be deleted
+
+04StudViewApp.php
+JH	Added the roomlocation below meeting location
+
+AdminConfirmScheIndApp.php
+JH	Added the roomlocation below meeting location
+
+15StudConfirmNext.php
+JH	Added the roomlocation below meeting location
+
+10StudConfirmSch.php
+JH	Added the roomlocation below meeting location
+
+05StudCancelApp.php
+JH	Added the roomlocation below meeting location
+
+AdminCreateNewAdv.php
+JH	Made new field to input preferred meeting location in the building(6 text characters)
+
+AdminCreateNew.php
+JH	Made New field from above push the new values to the table
+
+AdminProcessCreateNew.php
+JH	Processed the meetingLocation variable with other session variables.
+
+
+	
+
+	
+------ADDED FILES------
+
+header.php:
+EG	includes logout button, username message
+	'include's commonmethods.php and declares $COMMON and $debug
+	checks status for admin, studExist, adminCancel, and noApp
+
+footer.php:
+EG	includes umbc logo, copyright notice, university address
+	shows links for COEIT site, advising site, and advisor contact page
+	if admin==true, displays workOrder button
+	
+
+------DATABASE CHANGES------
+JH	Added MeetingLocation to both Advisor and Appointment Databases
