@@ -57,6 +57,7 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 					$row2 = mysql_fetch_row($rs2);
 					$oldAdvisorName = $row2[1] . " " . $row2[2];
 					$oldLocation = $row2[5];
+					$oldMeetingLoc = $row2[6];
 				}
 				else
 				{
@@ -68,7 +69,8 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 				echo "<label for='info' style='font-weight: normal;'>";
 				echo "<b>Advisor</b>: ", $oldAdvisorName, "<br>";
 				echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
-				echo "<b>Location</b>: ", $oldLocation, "</label>";
+				echo "<b>Location</b>: ", $oldLocation
+				echo "<b>Meeting Location</b>: ", $oldMeetingLoc, "</label>";
 			}
 			
 			$currentAdvisorName;
@@ -82,6 +84,7 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 				$row2 = mysql_fetch_row($rs2);
 				$currentAdvisorName = $row2[1] . " " . $row2[2];
 				$currentLocation = $row2[5];
+				$currentMeetingLoc = $row2[6];
 			}
 			else
 			{
@@ -94,7 +97,8 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 			echo "<label for='newinfo' style='font-weight: normal;'>";
 			echo "<b>Advisor</b>: ",$currentAdvisorName,"<br>";
 			echo "<b>Appointment</b>: ",date('l, F d, Y g:i A', $currentDatephp), "<br>";
-			echo "<b>Location</b>: ", $currentLocation, "</label>";
+			echo "<b>Location</b>: ", $currentLocation, "<br>";
+			echo "<b>Meeting Location</b>: ",$currentMeetingLoc, "</label>";
 		?>
         </div>
 	    <div class="nextButton">

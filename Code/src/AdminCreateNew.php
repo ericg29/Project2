@@ -43,6 +43,7 @@
 					$user = $_SESSION["AdvUN"];
 					$pass = $_SESSION["AdvPW"];
 					$room = $_SESSION["AdvRN"];
+					$meetingLoc = $_SESSION["AdvMeet"];
 			
 					//query: Get advisor with given username, name, and location
 					$sql = "SELECT * FROM `Proj2Advisors` WHERE `Username` = '$user' AND `FirstName` = '$first' AND  `LastName` = '$last' AND  `room` = '$room'";
@@ -54,8 +55,8 @@
 					}
 					else{
 						//query: insert new advisor with given info
-						$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`, `Room`) 
-						VALUES ('$first', '$last', '$user', '$pass', '$room')";
+						$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`, `Room`, `MeetingLocation`) 
+						VALUES ('$first', '$last', '$user', '$pass', '$room','$meetingLoc')";
 						echo ("<p style='font-size: 16px;'>$first $last<p>");
 						$rs = $COMMON->executeQuery($sql, "Advising Appointments");
 					}

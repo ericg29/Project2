@@ -6,6 +6,7 @@ $_SESSION["AdvL"] = $_POST["lastN"];
 $_SESSION["AdvUN"] = $_POST["UserN"];
 $_SESSION["AdvPW"] = $_POST["PassW"];
 $_SESSION["AdvRN"] = $_POST["RoomN"];
+$_SESSION["AdvMeet"] = $_POST["MeetingRoom"];
 $_SESSION["PassCon"] = false;
 
 if($_POST["PassW"] == $_POST["ConfP"]){

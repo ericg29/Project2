@@ -56,6 +56,7 @@ $studID = $_SESSION["studID"];
 					$row2 = mysql_fetch_row($rs2);
 					$advisorName = $row2[1] . " " . $row2[2];
 					$location = $row2[5];
+					$meetingLoc = $row2[6];
 				}
 				else
 				{
@@ -67,7 +68,8 @@ $studID = $_SESSION["studID"];
 				echo "<label for='info' style='font-weight: normal;'>";
 				echo "<b>Advisor</b>: ", $advisorName, "<br>";
 				echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $datephp), "<br>";
-				echo "<b>Location</b>: ", $location, "</label>";
+				echo "<b>Location</b>: ", $location, "<br>";
+				echo "<b>Meeting Location</b>: ", $meetingLoc, "</label>";
 			}
 			else // something is up, and there DB table needs to be fixed
 			{

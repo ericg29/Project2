@@ -56,6 +56,7 @@ $debug = false;
 				$row2 = mysql_fetch_row($rs2);					
 				$oldAdvisorName = $row2[1] . " " . $row2[2];
 				$location = $row2[5];
+				$meetingLoc = $row2[6];
 			}
 			//otherwise name is "group"
 			else
@@ -69,7 +70,8 @@ $debug = false;
 			echo "<div><label class='appInfo' for='info' style='font-weight: normal;'>";
 			echo "<b>Advisor</b>: ", $oldAdvisorName, "<br>";
 			echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
-			echo "<b>Location</b>: ", $location, "</label></div>";
+			echo "<b>Location</b>: ", $location, "<br>";
+			echo "<b>Meeting Location</b>: ", $meetingLoc, "</label></div>";
 		?>		
 		<div class="buttonContainer">
 			<form action = "StudProcessCancel.php" method = "post" name = "Cancel">

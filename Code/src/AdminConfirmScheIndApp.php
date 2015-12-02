@@ -108,6 +108,7 @@ session_start();
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			$row = mysql_fetch_row($rs);
 			$id = $row[0];
+			$meetingLoc = $_row[6];
 			
 			//make sure app doesn't exist
 			//insert new app to DB
@@ -123,7 +124,7 @@ session_start();
 					echo "<span style='color:red'>!!</span>";
 				}
 				else{
-					$sql = "insert into Proj2Appointments (`Time`, `AdvisorID`, `Major`, `Max`) values ('$dt', '$id', '$majorDB',1)";
+					$sql = "insert into Proj2Appointments (`Time`, `AdvisorID`, `Major`, `Max`, `MeetingLocation`) values ('$dt', '$id', '$majorDB',1,'$meetingLoc')";
 					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				}
 				echo "</p><br>";

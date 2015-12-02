@@ -83,6 +83,7 @@ session_start();
 					$row2 = mysql_fetch_row($rs2);
 					$advisorName = $row2[1] . " " . $row2[2];
 					$location = $row2[5];
+					$meetingLoc = $row2[6];
 					$_SESSION["advisor"] = $row2[0];
 				}
 				else{
@@ -97,7 +98,8 @@ session_start();
 				echo "<br><label for='newinfo' style='font-weight: normal;'>";
 				echo "<b>Advisor</b>: ",$advisorName,"<br>";
 				echo "<b>Appointment</b>: ",date('l, F d, Y g:i A', $timephp), "<br>";
-				echo "<b>Location</b>: ", $location, "</label>";
+				echo "<b>Location</b>: ", $location, "<br>";
+				echo "<b>Meeting Location</b>: ", $meetingLoc, "</label>";
 			
 				//print submit button
 				echo "</div>";

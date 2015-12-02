@@ -79,7 +79,13 @@ session_start();
 				<div class="field">
 						<label for="RoomN">Location</label>
 						<input id="RoomN" size="20" maxlength="6" type="text" name="RoomN" placeholder="ITE200" required>
-				</div>	
+				</div>
+				
+				<div class="field">
+						<label for="MeetingRoom">Meeting Location</label>
+						<input id="MeetingRoom" size="20" maxlength="6" type="text" name="MeetingRoom" placeholder="ITE202" required>
+				</div>
+				
 				<br>
 
 				<div class="nextButton">
