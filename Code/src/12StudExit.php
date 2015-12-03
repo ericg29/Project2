@@ -44,14 +44,17 @@ session_start();
 			elseif($_SESSION["status"] == "none"){
 				echo "You did not sign up for an advising appointment.";
 			}
-			if($_SESSION["status"] == "cancel"){
+			elseif($_SESSION["status"] == "cancel"){
 				echo "You have cancelled your advising appointment.";
 			}
-			if($_SESSION["status"] == "resch"){
+			elseif($_SESSION["status"] == "resch"){
 				echo "You have changed your advising appointment.";
 			}
-			if($_SESSION["status"] == "keep"){
+			elseif($_SESSION["status"] == "keep"){
 				echo "No changes have been made to your advising appointment.";
+			}
+			else{
+				echo "An error has occurred.";
 			}
 		?>
         </div>

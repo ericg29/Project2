@@ -10,13 +10,43 @@ All html and mixed php/html files:
 EG	Implemented new styling
 	removed 'include commonmethods.php' and declaration of $COMMON and $debug
 	included header.php and footer.php
-	
+
+
+index.php:
+EG	Now redirects to StudentAdminSignIn.php instead of 01StudSignIn.php
+
 	
 AdminConfirmEditGroupApp.php:
-EG	fixed php code to correctly identify app to be deleted
+EG	fixed php code to correctly identify app to be deleted or edited
 	
 AdminConfirmEditIndApp.php:
 EG	fixed php code to correctly identify app to be deleted
+
+AdminConfirmScheIndApp.php
+JH	Added the roomlocation below meeting location
+
+AdminCreateNewAdv.php
+JH	Made new field to input preferred meeting location in the building(6 text characters)
+
+AdminCreateNew.php
+JH	Made New field from above push the new values to the table
+
+AdminProcessCreateNew.php
+JH	Processed the meetingLocation variable with other session variables.
+
+
+04StudViewApp.php
+JH	Added the roomlocation below meeting location
+
+05StudCancelApp.php
+JH	Added the roomlocation below meeting location
+
+10StudConfirmSch.php
+JH	Added the roomlocation below meeting location
+
+15StudConfirmNext.php
+JH	Added the roomlocation below meeting location
+
 	
 
 	
@@ -34,3 +64,4 @@ EG	includes umbc logo, copyright notice, university address
 	
 
 ------DATABASE CHANGES------
+JH	Added MeetingLocation to both Advisor and Appointment Databases

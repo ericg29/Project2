@@ -4,7 +4,10 @@
 // I changed this since most of the time students will be logging in - not admin
 // Lupoli 8/18/15
 
-header("Location: 01StudSignIn.php");
+// I changed it back.
+// Gottlieb 12/2/201
+
+header("Location: StudentAdminSignIn.php");
 
 
 ?>

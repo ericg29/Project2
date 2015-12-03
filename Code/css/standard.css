@@ -204,25 +204,27 @@ html{
 		float: right;
 	}
 	h4{
-		font-size:12px;
+		font-size:14px;
 		color: #fff;
 		padding: 0px;
-		margin: 5px 10px;
+		margin: 3px 10px;
 		vertical-align: bottom;
+		font-weight: normal;
 	}
 	
 	h5{
-		font-size:12px;
+		font-size:14px;
 		color: #fff;
 		padding: 0px;
 		margin: 0px;
 		display: inline;
 		vertical-align: middle;
+		font-weight: normal;
 	}
 	
 	.footer_links {
 		text-decoration: underline;
-		font-size:12px;
+		font-size:14px;
 		color: #fff;
 		padding: 0px;
 		margin: 0px;
@@ -391,7 +393,7 @@ html{
 	}
 
 	.top{ 
-		border-bottom: 1px solid #eee; 
+		border-bottom: 1px solid #DADADA; 
 		padding-bottom: 12px; 
 		height: auto;
 		overflow: auto;
@@ -429,20 +431,20 @@ html{
 		height: 42px;
 		width: 42px;
 		float: right; 
-		padding: 7px;
+		padding: 6px 7px;
 		cursor: pointer; 
 		display: inline;
 		position: relative;
-		top: -60px;
+		top: -59px;
 		right: 0px;
 	}
 	
 	.studFooter {
-		margin-top: 7px; 
+		margin-top: 5px; 
 	}
 	
 	.adminFooter {
-		margin-top: 7px; 
+		margin-top: 6px; 
 		position: relative;  
 		right: 45px;
 	}

@@ -13,7 +13,7 @@
 			echo "<div class=\"studFooter\">";
 		}
 	?>		
-		<h4>© University of Maryland, Baltimore County  |  1000 Hilltop Circle  |  Baltimore, MD 21250</h4>
+		<h4>&#169; University of Maryland, Baltimore County  |  1000 Hilltop Circle  |  Baltimore, MD 21250</h4>
 		<div style="position: relative; top: -8px; margin: 0px 10px;">
 			<a class="footer_links" href="http://coeit.umbc.edu/">UMBC COEIT Website</a>
 			<h5> |  </h5>

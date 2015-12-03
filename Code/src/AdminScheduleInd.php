@@ -101,7 +101,7 @@ session_start();
 		<br>
 		</div>
 		<form method="link" action="AdminUI.php" name="home">
-			<input type="submit" name="next" class="button large go" value="Return to Home">
+			<input type="submit" name="next" class="button large" value="Cancel">
 		</form>
 		<br>
 		</div>
