@@ -19,9 +19,9 @@ session_start();
 		if(isset($_POST["advisor"])){
 			$_SESSION["advisor"] = $_POST["advisor"];
 		}
-		$row = getInfo($_SESSION["studID"], $_SESSION["admin"], $COMMON); 
+
 		$localAdvisor = $_SESSION["advisor"];
-		$localMaj = $row[5];
+		$localMaj = $_SESSION["major"];
 
 		$sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);

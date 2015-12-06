@@ -1,6 +1,6 @@
 <?php
 session_start();
-$delete = false;
+$_SESSION["Delete"] = false;
 ?>
 
 <!DOCTYPE html>

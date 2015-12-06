@@ -46,7 +46,7 @@ session_start();
 			<div class="top">
 				<h2>Create New Advisor Account</h2>
 				<?php
-				if($_GET["PassCon"] == true){
+				if($_SESSION["PassCon"] == true){
 					echo "<h3 style='color:red'>Passwords do not match!!</h3>";
 				}
 				?>

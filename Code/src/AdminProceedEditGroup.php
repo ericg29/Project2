@@ -26,7 +26,7 @@ session_start();
             include('../CommonMethods.php');
             $COMMON = new Common($debug);
 
-            $group = $_GET["groupApp"];
+            $group = $_SESSION["GroupApp"];
             parse_str($group);
 
 			//set up form to edit appt

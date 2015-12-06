@@ -2,31 +2,31 @@
 session_start();
 
 //set session variables
-$firstN = strtoupper($_POST["firstN"]);
-$lastN = strtoupper($_POST["lastN"]);
+$_SESSION["firstN"] = strtoupper($_POST["firstN"]);
+$_SESSION["lastN"] = strtoupper($_POST["lastN"]);
 $_SESSION["studID"] = strtoupper($_POST["studID"]);
-$email = $_POST["email"];
+$_SESSION["email"] = $_POST["email"];
 
 //set "major" to the appropriate abbreviation for the major selected
 if($_POST["major"] == "Chemical Engineering")
 {
-	$major = 'CENG';
+	$_SESSION["major"] = 'CENG';
 }
 elseif($_POST["major"] == "Computer Engineering")
 {
-	$major = 'CMPE';
+	$_SESSION["major"] = 'CMPE';
 }
 elseif($_POST["major"] == "Computer Science")
 {
-	$major = 'CMSC';
+	$_SESSION["major"] = 'CMSC';
 }
 elseif($_POST["major"] == "Mechanical Engineering")
 {
-	$major = 'MENG';
+	$_SESSION["major"] = 'MENG';
 }
 else
 {
-	$major = 'ENGR';	
+	$_SESSION["major"] = 'ENGR';	
 }
 
 header('Location: 02StudHome.php');

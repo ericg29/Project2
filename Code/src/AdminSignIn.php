@@ -20,7 +20,7 @@ $_SESSION["admin"] = true;
 <form action="AdminProcessSignIn.php" method="POST" name="SignIn">        
 
 		<?php
-		  if($_GET["UserVal"] == true){
+		  if($_SESSION["UserVal"] == true){
 			echo "<h3 style='color:red; float:left;'>Invalid Username/Password combination</h3><br>";
 		  }
 		?>

@@ -1,39 +1,42 @@
 <?php
 session_start();
-include('./header.php');
 
-$firstN = strtoupper($_POST["firstN"]);
-$lastN = strtoupper($_POST["lastN"]);
-$email = $_POST["email"];
+$_SESSION["firstN"] = strtoupper($_POST["firstN"]);
+$_SESSION["lastN"] = strtoupper($_POST["lastN"]);
+$_SESSION["email"] = $_POST["email"];
 
 if($_POST["major"] == "Chemical Engineering")
 {
-	$major = 'CENG';
+	$_SESSION["major"] = 'CENG';
 }
 elseif($_POST["major"] == "Computer Engineering")
 {
-	$major = 'CMPE';
+	$_SESSION["major"] = 'CMPE';
 }
 elseif($_POST["major"] == "Computer Science")
 {
-	$major = 'CMSC';
+	$_SESSION["major"] = 'CMSC';
 }
 elseif($_POST["major"] == "Mechanical Engineering")
 {
-	$major = 'MENG';
+	$_SESSION["major"] = 'MENG';
 }
 else
 {
-	$major = 'ENGR';	
+	$_SESSION["major"] = 'ENGR';	
 }
 
+$firstn = $_SESSION["firstN"];
+$lastn = $_SESSION["lastN"];
 $studid = $_SESSION["studID"];
+$email = $_SESSION["email"];
+$major = $_SESSION["major"];
 
 $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
-if($studExist == true){
-	$sql = "update `Proj2Students` set `FirstName` = '$firstN', `LastName` = '$lastN', `Email` = '$email', `Major` = '$major' where `StudentID` = '$studid'";
+if($_SESSION["studExist"] == true){
+	$sql = "update `Proj2Students` set `FirstName` = '$firstn', `LastName` = '$lastn', `Email` = '$email', `Major` = '$major' where `StudentID` = '$studid'";
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 }
 

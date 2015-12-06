@@ -38,13 +38,12 @@
 				<br>
 				<div style='text-align: center;'>
 				<?php
-					$row = getInfo($_SESSION["UserN"], $_SESSION["admin"], $COMMON);
-					$first = $row[1];
-					$last = $row[2];
-					$user = $_SESSION["UserN"];
-					$pass = $_SESSION["PassW"];
-					$room = $row[5];
-					$meetingLoc = $row[6];;
+					$first = $_SESSION["AdvF"];
+					$last = $_SESSION["AdvL"];
+					$user = $_SESSION["AdvUN"];
+					$pass = $_SESSION["AdvPW"];
+					$room = $_SESSION["AdvRN"];
+					$meetingLoc = $_SESSION["AdvMeet"];
 			
 					//query: Get advisor with given username, name, and location
 					$sql = "SELECT * FROM `Proj2Advisors` WHERE `Username` = '$user' AND `FirstName` = '$first' AND  `LastName` = '$last' AND  `room` = '$room'";

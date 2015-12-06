@@ -1,6 +1,6 @@
 <?php
 session_start();
-$appTime = $_POST["appTime"]; // radio button selection from previous form
+$_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previous form
 ?>
 
 <html lang="en">
@@ -37,7 +37,6 @@ $appTime = $_POST["appTime"]; // radio button selection from previous form
 		<h1>Confirm Appointment</h1>
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
-			<input type="hidden" name="appTime" value=<?php $appTime ?>>
 	    <?php
 			$studid = $_SESSION["studID"];
 			
@@ -70,13 +69,13 @@ $appTime = $_POST["appTime"]; // radio button selection from previous form
 				echo "<label for='info' style='font-weight: normal;'>";
 				echo "<b>Advisor</b>: ", $oldAdvisorName, "<br>";
 				echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
-				echo "<b>Location</b>: ", $oldLocation;
+				echo "<b>Location</b>: ", $oldLocation
 				echo "<b>Meeting Location</b>: ", $oldMeetingLoc, "</label>";
 			}
 			
 			$currentAdvisorName;
 			$currentAdvisorID = $_SESSION["advisor"];
-			$currentDatephp = strtotime($appTime);
+			$currentDatephp = strtotime($_SESSION["appTime"]);
 			//if new appt is not group
 			if($currentAdvisorID != 0){
 				//get new advisor's name and location
