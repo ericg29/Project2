@@ -78,7 +78,13 @@ JC      removed unneeded session variables
 AdminEditGroup.php
 JC      removed unneeded session variables
 
+AdminProcessEdit.php
+JC      removed unneeded session variables
+
 AdminProceedEditGroup.php
+JC      removed unneeded session variables
+
+AdminProcessSchedule.php
 JC      removed unneeded session variables
 
 AdminProcessCreateNew.php
@@ -103,6 +109,9 @@ StudProcessSch.php
 JC      removed unneeded session variables
 
 StudProcessSignIn.php
+JC      removed unneeded session variables
+
+StudProcessType.php
 JC      removed unneeded session variables
 
 workOrder.php

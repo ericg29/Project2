@@ -1,6 +1,7 @@
 <?php
 session_start();
 $appTime = $_POST["appTime"]; // radio button selection from previous form
+$advisor = $_POST["advisor"];
 ?>
 
 <html lang="en">
@@ -38,6 +39,7 @@ $appTime = $_POST["appTime"]; // radio button selection from previous form
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
 			<input type="hidden" name="appTime" value=<?php $appTime ?>>
+			<input type="hidden" name="advisor" value=<?php $advisor ?>>
 	    <?php
 			$studid = $_SESSION["studID"];
 			
@@ -75,7 +77,7 @@ $appTime = $_POST["appTime"]; // radio button selection from previous form
 			}
 			
 			$currentAdvisorName;
-			$currentAdvisorID = $_SESSION["advisor"];
+			$currentAdvisorID = $advisor;
 			$currentDatephp = strtotime($appTime);
 			//if new appt is not group
 			if($currentAdvisorID != 0){

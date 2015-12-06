@@ -15,7 +15,7 @@ else{
 	$email = $row[4];
 	$major = $row[5];
 	$studid = $_SESSION["studID"];
-	$advisor = $_SESSION["advisor"];
+	$advisor = $_POST["advisor"];
 
 	if($debug) { echo("Advisor -> $advisor<br>\n"); }
 
@@ -41,7 +41,7 @@ else{
 	
 	//regular new schedule
 	if($_POST["finish"] == 'Submit'){
-		if($_SESSION["advisor"] == 'Group')  // student scheduled for a group session
+		if($_POST["advisor"] == 'Group')  // student scheduled for a group session
 		{
 			$sql = "select * from Proj2Appointments where `Time` = '$apptime' and `AdvisorID` = 0";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -72,7 +72,7 @@ else{
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		
 		//schedule new app
-		if($_SESSION["advisor"] == 'Group'){
+		if($_POST["advisor"] == 'Group'){
 			$sql = "select * from Proj2Appointments where `Time` = '$apptime' and `AdvisorID` = 0";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			$row = mysql_fetch_row($rs);
