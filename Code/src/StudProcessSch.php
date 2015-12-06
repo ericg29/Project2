@@ -8,17 +8,19 @@ if($_POST["finish"] == 'Cancel'){
 	$_SESSION["status"] = "none";
 }
 else{
-	$firstn = $_SESSION["firstN"];
-	$lastn = $_SESSION["lastN"];
+	$row = getInfo($_SESSION["studID"], $_SESSION["admin"], $COMMON); 
+		
+	$firstN = $row[1];
+	$lastN = $row[2];
+	$email = $row[4];
+	$major = $row[5];
 	$studid = $_SESSION["studID"];
-	$major = $_SESSION["major"];
-	$email = $_SESSION["email"];
 	$advisor = $_SESSION["advisor"];
 
 	if($debug) { echo("Advisor -> $advisor<br>\n"); }
 
-	$apptime = $_SESSION["appTime"];
-	if($_SESSION["studExist"] == false){
+	$apptime = $_POST["appTime"];
+	if($studExist == false){
 		$sql = "insert into Proj2Students (`FirstName`,`LastName`,`StudentID`,`Email`,`Major`) values ('$firstn','$lastn','$studid','$email','$major')";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 	}

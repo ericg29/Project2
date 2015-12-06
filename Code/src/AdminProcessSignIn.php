@@ -22,7 +22,7 @@ $Common = new Common($debug);
 
 $_SESSION["UserN"] = strtoupper($_POST["UserN"]);
 $_SESSION["PassW"] = strtoupper($_POST["PassW"]);
-$_SESSION["UserVal"] = false;
+$UserVal = false;
 
 $user = $_SESSION["UserN"];
 $pass = $_SESSION["PassW"];
@@ -37,8 +37,8 @@ if($row){
 	else { header('Location: AdminUI.php'); }
 }
 else{
-	$_SESSION["UserVal"] = true;
-	header('Location: AdminSignIn.php'); 
+	$UserVal = true;
+	header('Location: AdminSignIn.php? UserVal=$UserVal');
 }
 
 ?>

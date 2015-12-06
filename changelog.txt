@@ -42,8 +42,71 @@ JH	Made New field from above push the new values to the table
 AdminProcessCreateNew.php
 JH	Processed the meetingLocation variable with other session variables.
 
+CommonMethods.php
+JC	added getInfo function to parse from database
 
+06StudEditInfo.php
+JC	removed unneeded session variables
 	
+08StudSelectTime.php
+JC      removed unneeded session variables
+
+10StudConfirmSch.php
+JC      removed unneeded session variables
+
+11StudSearchResult.php
+JC      removed unneeded session variables
+
+15StudConfirmNext.php
+JC      removed unneeded session variables
+
+AdminConfirmEditGroup.php
+JC      removed unneeded session variables
+
+AdminConfirmScheGroupApp.php
+JC      removed unneeded session variables
+
+AdminConfirmScheIndApp.php
+JC      removed unneeded session variables
+
+AdminCreateNew.php
+JC      removed unneeded session variables
+
+AdminCreateNewAdv.php
+JC      removed unneeded session variables
+
+AdminEditGroup.php
+JC      removed unneeded session variables
+
+AdminProceedEditGroup.php
+JC      removed unneeded session variables
+
+AdminProcessCreateNew.php
+JC      removed unneeded session variables
+
+AdminProcessEditGroup.php
+JC      removed unneeded session variables
+
+AdminProcessSignIn.php
+JC      removed unneeded session variables
+
+AdminSignIn.php
+JC      removed unneeded session variables
+
+AdminUI.php
+JC      removed unneeded session variables
+
+StudProcessEdit.php
+JC      removed unneeded session variables
+
+StudProcessSch.php
+JC      removed unneeded session variables
+
+StudProcessSignIn.php
+JC      removed unneeded session variables
+
+workOrder.php
+JC      fixed session variable name
 
 	
 ------ADDED FILES------

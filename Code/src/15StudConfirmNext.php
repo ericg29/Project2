@@ -1,5 +1,6 @@
 <?php
 session_start();
+$appTime = "";
 ?>
 
 <html lang="en">
@@ -37,11 +38,11 @@ session_start();
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
 	    <?php			
-			$_SESSION["type"] = $_POST["type"];
+			$type = $_POST["type"];
 			//get variables
+			$row = getInfo($_SESSION["studID"], $_SESSION["admin"], $COMMON); 
 			$studid = $_SESSION["studID"];
-			$major = $_SESSION["major"];
-			$type = $_SESSION["type"];			
+			$major = $row[5];		
 			$sql = "";
 			
 			//query: select soonest appt after the current time that's not full
@@ -73,7 +74,7 @@ session_start();
 			{
 				//get the appt time and advisor ID
 				$timephp = strtotime($row[1]);
-				$_SESSION["appTime"] = $row[1];
+				$appTime = $row[1];
 				$advisorID = $row[2];
 			
 				if($advisorID != 0){
@@ -113,6 +114,7 @@ session_start();
 				$_SESSION["advisor"] = "unavailable";
 			}
 		?>
+		<input type="hidden" name="appTime" value= <?php $appTime ?>>
 		<input type='submit' name='finish' class='button large' value='Cancel' style='width: 90px;'>
 		</div>
 	    </div>

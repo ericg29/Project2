@@ -35,8 +35,8 @@ session_start();
 	<div id="section">
 	<div class="top">
         <?php
-          $delete = $_SESSION["Delete"];
-          $group = $_SESSION["GroupApp"];
+          $delete = $_GET["delete"];
+          $group = $_GET["groupApp"];
           parse_str($group);
 
 		  //if the appt was deleted

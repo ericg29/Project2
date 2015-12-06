@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
-$_SESSION["PassCon"] = false;
+$PassCon = false;
 ?>
 
 <!DOCTYPE html>

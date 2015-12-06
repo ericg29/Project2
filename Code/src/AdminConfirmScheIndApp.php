@@ -102,6 +102,7 @@ session_start();
 			}
 			
 			//get advisor id
+			$row = getInfo($_SESSION["UserN"], $_SESSION["admin"], $COMMON);
 			$User = $_SESSION["UserN"];
 			$Pass = $_SESSION["PassW"];
 			$sql = "select `id` from `Proj2Advisors` where `Username` = '$User' and `Password` = '$Pass'";

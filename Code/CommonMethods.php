@@ -35,18 +35,18 @@ class Common
 
 function getInfo($userID, $admin, $com)
 {
-	if (admin == true)
+	if($admin == true)
 	{
-		$sql = "SELECT * `Proj2Advisors` where `Username` = '$userID'";
-		$rs = $com->executeQuery($sql $_SERVER["SCRIPT_NAME"]);
+		$sql = "SELECT * from `Proj2Advisors` where `Username` = '$userID'";
+		$rs = $com->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		$row = mysql_fetch_row($rs);
 		
 		return $row;
 	}
 	else
 	{
-		$sql = "SELECT * `Proj2Students` where `Username` = '$StudentID'";
-		$rs = $com->executeQuery($sql $_SERVER["SCRIPT_NAME"]);
+		$sql = "SELECT * from `Proj2Students` where `StudentID` = '$userID'";
+		$rs = $com->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		$row = mysql_fetch_row($rs);
 		
 		return $row;

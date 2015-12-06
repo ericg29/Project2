@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-$_SESSION["AdvF"] = $_POST["firstN"];
-$_SESSION["AdvL"] = $_POST["lastN"];
-$_SESSION["AdvUN"] = $_POST["UserN"];
-$_SESSION["AdvPW"] = $_POST["PassW"];
-$_SESSION["AdvRN"] = $_POST["RoomN"];
-$_SESSION["AdvMeet"] = $_POST["MeetingRoom"];
-$_SESSION["PassCon"] = false;
+$AdvF = $_POST["firstN"];
+$AdvL = $_POST["lastN"];
+$_SESSION["UserN"] = $_POST["UserN"];
+$_SESSION["PassW"] = $_POST["PassW"];
+$AdvRN = $_POST["RoomN"];
+$AdvMeet = $_POST["MeetingRoom"];
+$PassCon = false;
 
 if($_POST["PassW"] == $_POST["ConfP"]){
 	header('Location: AdminCreateNew.php');
 }
 elseif($_POST["PassW"] != $_POST["ConfP"]){
 	$_SESSION["PassCon"] = true;
-	header('Location: AdminCreateNewAdv.php');
+	header('Location: AdminCreateNewAdv.php? PassCon=$PassCon');
 }
 
 ?>
