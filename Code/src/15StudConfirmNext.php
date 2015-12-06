@@ -1,7 +1,6 @@
 <?php
 session_start();
 $appTime = "";
-$advisor = "";
 ?>
 
 <html lang="en">
@@ -86,11 +85,11 @@ $advisor = "";
 					$advisorName = $row2[1] . " " . $row2[2];
 					$location = $row2[5];
 					$meetingLoc = $row2[6];
-					$advisor = $row2[0];
+					$_SESSION["advisor"] = $row2[0];
 				}
 				else{
 					//set group advisor info
-					$advisor = "Group";
+					$_SESSION["advisor"] = "Group";
 					$advisorName = "Group";
 					$location = "ITE200";
 				}
@@ -112,11 +111,10 @@ $advisor = "";
 			else
 			{
 				echo "<p style=\"color:red\">No more appointments are available.</p>";
-				$advisor = "unavailable";
+				$_SESSION["advisor"] = "unavailable";
 			}
 		?>
 		<input type="hidden" name="appTime" value= <?php $appTime ?>>
-		<input type="hidden" name="advisor" value=<?php $advisor ?>>
 		<input type='submit' name='finish' class='button large' value='Cancel' style='width: 90px;'>
 		</div>
 	    </div>

@@ -2,8 +2,8 @@
 session_start();
 
 if ($_POST["next"] == "Group"){
-	$advisor = $_POST["next"];
-	header('Location: AdminScheduleGroup.php? advisor=$advisor');
+	$_SESSION["advisor"] = $_POST["next"];
+	header('Location: AdminScheduleGroup.php');
 }
 elseif ($_POST["next"] == "Individual"){
 	header('Location: AdminScheduleInd.php');

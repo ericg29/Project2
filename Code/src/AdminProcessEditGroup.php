@@ -6,8 +6,8 @@ $delete = false;
 
 if ($_POST["next"] == "Delete Appointment"){
 	$delete = true;
-	$advisor = $_POST["next"];
-	header('Location: AdminConfirmEditGroup.php? groupApp=$groupApp & delete=$delete & advisor=$advisor');
+	$_SESSION["advisor"] = $_POST["next"];
+	header('Location: AdminConfirmEditGroup.php? groupApp=$groupApp & delete=$delete');
 }
 elseif ($_POST["next"] == "Edit Appointment"){
 

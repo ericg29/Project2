@@ -1,6 +1,5 @@
 <?php
 session_start();
-$advisor = $_GET["advisor"];
 ?>
 
 <html lang="en">
@@ -18,10 +17,10 @@ $advisor = $_GET["advisor"];
 		$debug = false;
 
 		if(isset($_POST["advisor"])){
-			$advisor = $_POST["advisor"];
+			$_SESSION["advisor"] = $_POST["advisor"];
 		}
 		$row = getInfo($_SESSION["studID"], $_SESSION["admin"], $COMMON); 
-		$localAdvisor = $advisor;
+		$localAdvisor = $_SESSION["advisor"];
 		$localMaj = $row[5];
 
 		$sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
@@ -53,7 +52,6 @@ $advisor = $_GET["advisor"];
 		<h1>Select Appointment Time</h1>
 	    <div class="field">
 		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
-			<input type="hidden" name="advisor" value=<?php $advisor ?>>
 	    <?php
 
 			// http://php.net/manual/en/function.time.php fpr SQL statements below
@@ -62,7 +60,7 @@ $advisor = $_GET["advisor"];
 			$curtime = time();
 			$apptCount = 0;
 
-			if ($advisor != "Group")  // for individual appointments only
+			if ($_SESSION["advisor"] != "Group")  // for individual appointments only
 			{ 
 				//get all available times
 				$sql = "select * from Proj2Appointments where $temp `EnrolledNum` = 0 
@@ -93,7 +91,7 @@ $advisor = $_GET["advisor"];
 			if ($apptCount == 0)
 			{
 				echo "<p style=\"color:red\">No more appointments are available.</p>";
-				$advisor = "Group";
+				$_SESSION["advisor"] = "Group";
 			}
 			else
 			{
