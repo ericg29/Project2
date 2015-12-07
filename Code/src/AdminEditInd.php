@@ -23,7 +23,7 @@ session_start();
 	<div class="container admin">
 	<div id="sectionFullLarge">
 	<div class="top">
-          <h2>Select which appointment you would like to change: </h2>
+          <h2>Select which appointment you would like to delete: </h2>
 		  <div class="field">
 		  
           <?php

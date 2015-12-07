@@ -1,5 +1,6 @@
 <?php
 session_start();
+$delete = false;
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +43,7 @@ session_start();
             parse_str($group);
 
 			//set up form to edit appt
-            echo("<form action=\"AdminConfirmEditGroup.php?delete=false\" method=\"post\" name=\"Edit\">");
+            echo("<form action=\"AdminConfirmEditGroup.php\" method=\"post\" name=\"Edit\">");
             echo("Time: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
             echo("Majors included: ");
             if($row[2]){
@@ -81,6 +82,7 @@ session_start();
 			echo("</div>");
             echo("<div class=\"nextButton\">");
 			echo("<input type=\"hidden\" name=\"groupApp\" value=\"$group\"> ");
+			echo("<input type=\"hidden\" name=\"delete\" value=\"$delete\"> ");
             echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Submit\">");
             echo("</div>");
           ?>

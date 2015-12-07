@@ -37,15 +37,16 @@ session_start();
         <?php
 		if ($_POST["groupApp"]) {
 			$group = $_POST["groupApp"];
+		    $delete = $_POST["delete"];
 		}
 		else {
-          $group = $_GET["groupApp"];			
+			$group = $_GET["groupApp"];	
+			$delete = $_GET["delete"];		
 		}
-		  $delete = $_GET["delete"];
           parse_str($group);
-
+		  
 		  //if the appt was deleted
-          if($delete == true){
+          if($delete){
             echo("<h1>Removed Appointment</h1><br>");
 			echo("<div class=\"appInfo\">");
 			
@@ -119,14 +120,16 @@ session_start();
 
             echo("<b>Number of students enrolled</b>: $row[3]<br>");
             echo("<b>Student limit</b>: $row[4]");
-			echo("</div><br></div>");
+			echo("</div><br>");
+			if($stds[0]){
+              echo "<p style='color:red'>Students have been notified of the cancellation.</p>";
+            }
+			echo("</div>");
             echo("<form method=\"link\" action=\"AdminUI.php\">");
             echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
             echo("</form>");
             echo("<div class=\"bottom\">");
-            if($stds[0]){
-              echo "<p style='color:red'>Students have been notified of the cancellation.</p>";
-            }
+            
 			echo("</div>");
           }
 		  //if the appt was only changed, not deleted
@@ -137,16 +140,23 @@ session_start();
 			echo("<div class=\"appInfo\">");
             echo("<b>Time</b>: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
             echo("<b>Majors included</b>: ");
-            if($row[2]){ 
+            if($row[2]){
 				//replace abbreviations with full major names
 				$majors = $row[2];
-				$majors = str_replace("CMPE", "Computer Engineering", $majors);
-				$majors =  str_replace("CENG", "Chemical Engineering", $majors);
-				$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
-				$majors =  str_replace("CMSC", "Computer Science", $majors);
-				$majors =  str_replace("ENGR", "Engineering Undecided", $majors);
-			echo("$majors<br>"); 
-			}
+ 				if (trim($majors) == 'CMPE CMSC MENG CENG ENGR')
+				{
+					echo("All<br>"); 
+				}
+				else
+				{
+					$majors = str_replace("CMPE", "<label style='margin-left:30px;'>Computer Engineering</label><br>", $majors);
+					$majors =  str_replace("CENG", "<label style='margin-left:30px;'>Chemical Engineering</label><br>", $majors);
+					$majors =  str_replace("MENG", "<label style='margin-left:30px;'>Mechanical Engineering</label><br>", $majors);
+					$majors =  str_replace("CMSC", "<label style='margin-left:30px;'>Computer Science</label><br>", $majors);
+					$majors =  str_replace("ENGR", "<label style='margin-left:30px;'>Engineering Undecided</label><br>", $majors);
+					echo("<br>$majors"); 
+				}
+            }
             else{
               echo("Available to all majors<br>"); 
             }
@@ -159,16 +169,23 @@ session_start();
 			echo("<div class=\"appInfo\">");
             echo("<b>Time: </b>". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
             echo("<b>Majors included: </b>");
-            if($row[2]){ 
+            if($row[2]){
 				//replace abbreviations with full major names
 				$majors = $row[2];
-				$majors = str_replace("CMPE", "Computer Engineering", $majors);
-				$majors =  str_replace("CENG", "Chemical Engineering", $majors);
-				$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
-				$majors =  str_replace("CMSC", "Computer Science", $majors);
-				$majors =  str_replace("ENGR", "Engineering Undecided", $majors);
-			echo("$majors<br>"); 
-			}
+ 				if (trim($majors) == 'CMPE CMSC MENG CENG ENGR')
+				{
+					echo("All<br>"); 
+				}
+				else
+				{
+					$majors = str_replace("CMPE", "<label style='margin-left:30px;'>Computer Engineering</label><br>", $majors);
+					$majors =  str_replace("CENG", "<label style='margin-left:30px;'>Chemical Engineering</label><br>", $majors);
+					$majors =  str_replace("MENG", "<label style='margin-left:30px;'>Mechanical Engineering</label><br>", $majors);
+					$majors =  str_replace("CMSC", "<label style='margin-left:30px;'>Computer Science</label><br>", $majors);
+					$majors =  str_replace("ENGR", "<label style='margin-left:30px;'>Engineering Undecided</label><br>", $majors);
+					echo("<br>$majors"); 
+				}
+            }
             else{
               echo("Available to all majors<br>"); 
             }
