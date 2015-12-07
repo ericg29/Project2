@@ -15,9 +15,20 @@ EG	Implemented new styling
 index.php:
 EG	Now redirects to StudentAdminSignIn.php instead of 01StudSignIn.php
 
+
+
+AdminEditGroup.php:
+EG	Implemented passing without session variables
+
+AdminProcessEditGroup.php:
+EG	Implemented passing without session variables
+
+AdminProceedEditGroup.php:
+EG	Implemented passing without session variables
 	
 AdminConfirmEditGroupApp.php:
 EG	fixed php code to correctly identify app to be deleted or edited
+EG	Implemented passing without session variables
 	
 AdminConfirmEditIndApp.php:
 EG	fixed php code to correctly identify app to be deleted
@@ -37,15 +48,20 @@ JH	Processed the meetingLocation variable with other session variables.
 
 04StudViewApp.php
 JH	Added the roomlocation below meeting location
+EG	Fixed displaying location for groups and individual appts
 
 05StudCancelApp.php
 JH	Added the roomlocation below meeting location
+EG	Fixed displaying location for groups and individual appts
 
 10StudConfirmSch.php
 JH	Added the roomlocation below meeting location
+EG	Fixed displaying location for groups and individual appts
 
 15StudConfirmNext.php
 JH	Added the roomlocation below meeting location
+EG	Fixed displaying location for groups and individual appts
+
 
 	
 
