@@ -1,16 +1,15 @@
 <?php
 session_start();
 
-$_SESSION["GroupApp"] = $_POST["GroupApp"];
-$_SESSION["Delete"] = false;
+$groupApp = urlencode($_POST["groupApp"]);
+
 
 if ($_POST["next"] == "Delete Appointment"){
-	$_SESSION["Delete"] = true;
-	$_SESSION["advisor"] = $_POST["next"];
-	header('Location: AdminConfirmEditGroup.php');
+	$advisor = urlencode($_POST["next"]);
+	header("Location: AdminConfirmEditGroup.php?advisor=$advisor&delete=true&groupApp=$groupApp");
 }
 elseif ($_POST["next"] == "Edit Appointment"){
-	header('Location: AdminProceedEditGroup.php');
+	header("Location: AdminProceedEditGroup.php?delete=false&groupApp=$groupApp");
 }
 
 ?>

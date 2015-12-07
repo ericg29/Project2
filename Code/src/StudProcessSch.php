@@ -13,11 +13,11 @@ else{
 	$studid = $_SESSION["studID"];
 	$major = $_SESSION["major"];
 	$email = $_SESSION["email"];
-	$advisor = $_SESSION["advisor"];
+	$advisor = $_POST["advisor"];
 
 	if($debug) { echo("Advisor -> $advisor<br>\n"); }
 
-	$apptime = $_SESSION["appTime"];
+	$apptime = $_POST["appTime"];
 	if($_SESSION["studExist"] == false){
 		$sql = "insert into Proj2Students (`FirstName`,`LastName`,`StudentID`,`Email`,`Major`) values ('$firstn','$lastn','$studid','$email','$major')";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -39,7 +39,7 @@ else{
 	
 	//regular new schedule
 	if($_POST["finish"] == 'Submit'){
-		if($_SESSION["advisor"] == 'Group')  // student scheduled for a group session
+		if($advisor == 'Group')  // student scheduled for a group session
 		{
 			$sql = "select * from Proj2Appointments where `Time` = '$apptime' and `AdvisorID` = 0";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -70,7 +70,7 @@ else{
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		
 		//schedule new app
-		if($_SESSION["advisor"] == 'Group'){
+		if($advisor == 'Group'){
 			$sql = "select * from Proj2Appointments where `Time` = '$apptime' and `AdvisorID` = 0";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 			$row = mysql_fetch_row($rs);

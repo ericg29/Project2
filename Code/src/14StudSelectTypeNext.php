@@ -43,7 +43,6 @@ session_start();
 	    </div>
 		</form>
 		<br>
-		<br>
 		</div>
 		<div>
 		<form method="link" action="02StudHome.php">

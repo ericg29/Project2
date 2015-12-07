@@ -16,58 +16,83 @@ session_start();
 	<link rel='stylesheet' type='text/css' href='../css/standard.css'/>
   </head> 
   <body>
-    <div id="login">
-      <div id="form">
-        <div class="top">
+	<div class="container">
+		<?php
+			include('./header.php');
+		?>
+		<div class="container admin">
+		<div id="nav">
+			<form action="AdminProcessUI.php" method="post" name="UI">
+		  
+				<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
+				<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
+				<div class="button selected">Edit appointments</div><br>
+				<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
+				<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+			
+			</form>
+		</div>
+		<div id="section">
+		<div class="top">
           <h1>Edit Group Appointment</h1>
-		  <div class="field">
+		  <div class="appInfo">
           <?php
-            $debug = false;
-            include('../CommonMethods.php');
-            $COMMON = new Common($debug);
 
-            $group = $_SESSION["GroupApp"];
+            $group = $_GET["groupApp"];
             parse_str($group);
 
 			//set up form to edit appt
-            echo("<form action=\"AdminConfirmEditGroup.php\" method=\"post\" name=\"Edit\">");
-            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("<form action=\"AdminConfirmEditGroup.php?delete=false\" method=\"post\" name=\"Edit\">");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>");
             echo("Majors included: ");
-            if($row[1]){
+            if($row[2]){
 				//replace abbreviations with full major names
-				$majors = $row[1];
-				$majors = str_replace("CMPE", "Computer Engineering", $majors);
-				$majors =  str_replace("CENG", "Chemical Engineering", $majors);
-				$majors =  str_replace("MENG", "Mechanical Engineering", $majors);
-				$majors =  str_replace("CMSC", "Computer Science", $majors);
-				$majors =  str_replace("ENGR", "Engineering Undecided", $majors);
-				echo("$majors<br>"); 
+				$majors = $row[2];
+ 				if (trim($majors) == 'CMPE CMSC MENG CENG ENGR')
+				{
+					echo("All<br>"); 
+				}
+				else
+				{
+					$majors = str_replace("CMPE", "<label style='margin-left:30px;'>Computer Engineering</label><br>", $majors);
+					$majors =  str_replace("CENG", "<label style='margin-left:30px;'>Chemical Engineering</label><br>", $majors);
+					$majors =  str_replace("MENG", "<label style='margin-left:30px;'>Mechanical Engineering</label><br>", $majors);
+					$majors =  str_replace("CMSC", "<label style='margin-left:30px;'>Computer Science</label><br>", $majors);
+					$majors =  str_replace("ENGR", "<label style='margin-left:30px;'>Engineering Undecided</label><br>", $majors);
+					echo("<br>$majors"); 
+				}
             }
             else{
               echo("Available to all majors<br>"); 
             }
-            echo("Number of students enrolled: $row[2] <br>");
+            echo("Number of students enrolled: $row[3] <br>");
 			//input for student limit
             echo("Student limit: ");
-            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"$row[2]\" max=\"$row[3]\" value=\"$row[3]\" />");
+            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"$row[3]\" max=\"10\" value=\"$row[4]\" />");
 
             echo("<br><br>");
 
-            echo("<div class=\"nextButton\">");
-            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Submit\">");
-            echo("</div>");
-            echo("</div>");
-            echo("<div class=\"bottom\">");
-            if($row[2] > 0){
-              echo "<p style='color:red'>Note: There are currently $row[2] students enrolled in this appointment. <br>
+
+			if($row[3] > 0){
+              echo "<p style='color:red'>Note: There are currently $row[3] students enrolled in this appointment. <br>
                     The student limit cannot be changed to be under this amount.</p>";
             }
             echo("</div>");
+			echo("</div>");
+            echo("<div class=\"nextButton\">");
+			echo("<input type=\"hidden\" name=\"groupApp\" value=\"$group\"> ");
+            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Submit\">");
+            echo("</div>");
           ?>
-		  </div>
-  </div>
-  </div>
-  </form>
+			</form>
+		</div>
+		</div>
+		<?php
+			include('./footer.php');
+		?>
+	</div>
   </body>
   
 </html>
+
+        

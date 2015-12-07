@@ -70,8 +70,13 @@ $debug = false;
 			echo "<div><label class='appInfo' for='info' style='font-weight: normal;'>";
 			echo "<b>Advisor</b>: ", $oldAdvisorName, "<br>";
 			echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
-			echo "<b>Location</b>: ", $location, "<br>";
-			echo "<b>Meeting Location</b>: ", $meetingLoc, "</label></div>";
+			if ($advisorID != 0) {
+				echo "<b>Office Location</b>: ", $location, "<br>";
+				echo "<b>Meeting Location</b>: ", $meetingLoc, "</label>";
+			}
+			else {
+				echo "<b>Meeting Location</b>: ", $location, "</label></div>";
+			}
 		?>		
 		<div class="buttonContainer">
 			<form action = "StudProcessCancel.php" method = "post" name = "Cancel">

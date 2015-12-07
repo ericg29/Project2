@@ -17,10 +17,15 @@ session_start();
 		$debug = false;
 
 		if(isset($_POST["advisor"])){
-			$_SESSION["advisor"] = $_POST["advisor"];
+			$advisor = $_POST["advisor"];
 		}
+		else{
+			$advisor = $_GET["advisor"];
+		}
+		$advURL = urlencode($advisor);
+		
 
-		$localAdvisor = $_SESSION["advisor"];
+		$localAdvisor = $_GET["advisor"];
 		$localMaj = $_SESSION["major"];
 
 		$sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
@@ -53,6 +58,7 @@ session_start();
 	    <div class="field">
 		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
 	    <?php
+			echo("<input type=\"hidden\" name=\"advisor\" value=\"$advURL\">");
 
 			// http://php.net/manual/en/function.time.php fpr SQL statements below
 			// Comparing timestamps, could not remember. 
@@ -60,11 +66,11 @@ session_start();
 			$curtime = time();
 			$apptCount = 0;
 
-			if ($_SESSION["advisor"] != "Group")  // for individual appointments only
+			if ($advisor != "Group")  // for individual appointments only
 			{ 
 				//get all available times
 				$sql = "select * from Proj2Appointments where $temp `EnrolledNum` = 0 
-					and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$_POST['advisor']." 
+					and (`Major` like '%$localMaj%' or `Major` = '') and `Time` > '".date('Y-m-d H:i:s')."' and `AdvisorID` = ".$advisor." 
 					order by `Time` ASC limit 30";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Individual Advising</h2><br>";
@@ -91,7 +97,7 @@ session_start();
 			if ($apptCount == 0)
 			{
 				echo "<p style=\"color:red\">No more appointments are available.</p>";
-				$_SESSION["advisor"] = "Group";
+				$advisor = "Group";
 			}
 			else
 			{

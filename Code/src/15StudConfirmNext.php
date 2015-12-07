@@ -73,7 +73,7 @@ session_start();
 			{
 				//get the appt time and advisor ID
 				$timephp = strtotime($row[1]);
-				$_SESSION["appTime"] = $row[1];
+				$appTime = $row[1];
 				$advisorID = $row[2];
 			
 				if($advisorID != 0){
@@ -84,11 +84,11 @@ session_start();
 					$advisorName = $row2[1] . " " . $row2[2];
 					$location = $row2[5];
 					$meetingLoc = $row2[6];
-					$_SESSION["advisor"] = $row2[0];
+					$advisor = $row2[0];
 				}
 				else{
 					//set group advisor info
-					$_SESSION["advisor"] = "Group";
+					$advisor = "Group";
 					$advisorName = "Group";
 					$location = "ITE200";
 				}
@@ -98,8 +98,13 @@ session_start();
 				echo "<br><label for='newinfo' style='font-weight: normal;'>";
 				echo "<b>Advisor</b>: ",$advisorName,"<br>";
 				echo "<b>Appointment</b>: ",date('l, F d, Y g:i A', $timephp), "<br>";
-				echo "<b>Location</b>: ", $location, "<br>";
-				echo "<b>Meeting Location</b>: ", $meetingLoc, "</label>";
+				if ($advisorID != 0) {
+					echo "<b>Office Location</b>: ", $location, "<br>";
+					echo "<b>Meeting Location</b>: ", $meetingLoc, "</label>";
+				}
+				else {
+					echo "<b>Meeting Location</b>: ", $location, "</label>";
+				}
 			
 				//print submit button
 				echo "</div>";
@@ -110,8 +115,10 @@ session_start();
 			else
 			{
 				echo "<p style=\"color:red\">No more appointments are available.</p>";
-				$_SESSION["advisor"] = "unavailable";
+				$advisor = "unavailable";
 			}
+			echo("<input type=\"hidden\" name=\"advisor\" value=\"$advisor\">");
+			echo("<input type=\"hidden\" name=\"appTime\" value=\"$appTime\">");
 		?>
 		<input type='submit' name='finish' class='button large' value='Cancel' style='width: 90px;'>
 		</div>

@@ -35,8 +35,13 @@ session_start();
 	<div id="section">
 	<div class="top">
         <?php
-          $delete = $_SESSION["Delete"];
-          $group = $_SESSION["GroupApp"];
+		if ($_POST["groupApp"]) {
+			$group = $_POST["groupApp"];
+		}
+		else {
+          $group = $_GET["groupApp"];			
+		}
+		  $delete = $_GET["delete"];
           parse_str($group);
 
 		  //if the appt was deleted
@@ -122,6 +127,7 @@ session_start();
             if($stds[0]){
               echo "<p style='color:red'>Students have been notified of the cancellation.</p>";
             }
+			echo("</div>");
           }
 		  //if the appt was only changed, not deleted
           else{
@@ -180,7 +186,6 @@ session_start();
             echo("</form>");
           }
         ?>
-	  </div>
 	 
 	</div>
 	</div>

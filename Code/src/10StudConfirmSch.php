@@ -1,6 +1,9 @@
 <?php
 session_start();
-$_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previous form
+$appTime = $_POST["appTime"]; // radio button selection from previous form
+$advisor = $_POST["advisor"];
+$timeURL = urlencode($appTime);
+$advURL = urlencode($advisor);
 ?>
 
 <html lang="en">
@@ -37,6 +40,7 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 		<h1>Confirm Appointment</h1>
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
+		
 	    <?php
 			$studid = $_SESSION["studID"];
 			
@@ -69,13 +73,18 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 				echo "<label for='info' style='font-weight: normal;'>";
 				echo "<b>Advisor</b>: ", $oldAdvisorName, "<br>";
 				echo "<b>Appointment</b>: ", date('l, F d, Y g:i A', $oldDatephp), "<br>";
-				echo "<b>Location</b>: ", $oldLocation
-				echo "<b>Meeting Location</b>: ", $oldMeetingLoc, "</label>";
+				if ($oldAdvisorID != 0) {
+					echo "<b>Office Location</b>: ", $oldLocation, "<br>";
+					echo "<b>Meeting Location</b>: ", $oldMeetingLoc, "</label>";
+				}
+				else {
+					echo "<b>Meeting Location</b>: ", $oldLocation, "</label>";
+				}
 			}
 			
 			$currentAdvisorName;
-			$currentAdvisorID = $_SESSION["advisor"];
-			$currentDatephp = strtotime($_SESSION["appTime"]);
+			$currentAdvisorID = $_POST["advisor"];
+			$currentDatephp = strtotime($appTime);
 			//if new appt is not group
 			if($currentAdvisorID != 0){
 				//get new advisor's name and location
@@ -97,8 +106,13 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 			echo "<label for='newinfo' style='font-weight: normal;'>";
 			echo "<b>Advisor</b>: ",$currentAdvisorName,"<br>";
 			echo "<b>Appointment</b>: ",date('l, F d, Y g:i A', $currentDatephp), "<br>";
-			echo "<b>Location</b>: ", $currentLocation, "<br>";
-			echo "<b>Meeting Location</b>: ",$currentMeetingLoc, "</label>";
+			if ($currentAdvisorID != 0) {
+				echo "<b>Office Location</b>: ", $currentLocation, "<br>";
+				echo "<b>Meeting Location</b>: ", $currentMeetingLoc, "</label>";
+			}
+			else {
+				echo "<b>Meeting Location</b>: ", $currentLocation, "</label>";
+			}
 		?>
         </div>
 	    <div class="nextButton">
@@ -109,9 +123,13 @@ $_SESSION["appTime"] = $_POST["appTime"]; // radio button selection from previou
 			else{
 				echo "<input type='submit' name='finish' class='button large go' value='Submit'>";
 			}
+			echo("<input type=\"hidden\" name=\"advisor\" value=\"$advisor\">");
+			echo("<input type=\"hidden\" name=\"appTime\" value=\"$appTime\">");
 		?>
 			<input style="margin-left: 50px" type="submit" name="finish" class="button large" value="Cancel">
+
 	    </div>
+		<br>
 		</form>
 		</div>
 	</div>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["Delete"] = false;
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +22,7 @@ $_SESSION["Delete"] = false;
 			?>
 			<div class="container admin">
 			<div id="sectionFullLarge">
-					<div class="top">
+			<div class="top">
 			  <h1>Edit Group Appointment</h1>
 			  <h2>Select an appointment to change</h2>
 			  <div class="field">
@@ -39,7 +38,7 @@ $_SESSION["Delete"] = false;
 		echo("<table border='1px'>\n<tr>");
 		echo("<tr><td width=50%>Time</td><td width=25%>Majors</td><td width=12%>Seats Enrolled</td><td width=12%>Total Seats</td></tr>\n");
 
-				  echo("<td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"GroupApp\" 
+				  echo("<td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"groupApp\" 
 					required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
 				  echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
 				  if($row[3]){
@@ -62,7 +61,7 @@ $_SESSION["Delete"] = false;
 				//rest of row
 				  echo("</td></tr>\n");
 				  while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-					echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"GroupApp\" 
+					echo("<tr><td><label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"groupApp\" 
 					  required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
 					echo(date('l, F d, Y g:i A', strtotime($row[1])). "</label></td>");
 					if($row[3]){
@@ -85,6 +84,7 @@ $_SESSION["Delete"] = false;
 				  }
 
 			echo("</table>");
+				echo("<input type=\"hidden\" name=\"advisor\" value=\"Group\"> ");
 				  //print buttons
 				  echo("<div class=\"nextButton\">");
 				  echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
