@@ -8,17 +8,22 @@ if($_POST["finish"] == 'Cancel'){
 	$_SESSION["status"] = "none";
 }
 else{
-	$firstn = $_SESSION["firstN"];
-	$lastn = $_SESSION["lastN"];
+	$firstn = $_POST["firstN"];
+	$lastn = $_POST["lastN"];
 	$studid = $_SESSION["studID"];
-	$major = $_SESSION["major"];
-	$email = $_SESSION["email"];
+	$major = $_POST["major"];
+	$email = $_POST["email"];
 	$advisor = $_POST["advisor"];
+	
+	$firstN = urlencode($firstn);
+	$lastN = urlencode($lastn);
+	$Email = urlencode($email);
+	$Major = urlencode($major);
 
 	if($debug) { echo("Advisor -> $advisor<br>\n"); }
 
 	$apptime = $_POST["appTime"];
-	if($_SESSION["studExist"] == false){
+	if($_POST["studExist"] == false){
 		$sql = "insert into Proj2Students (`FirstName`,`LastName`,`StudentID`,`Email`,`Major`) values ('$firstn','$lastn','$studid','$email','$major')";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 	}
@@ -31,7 +36,7 @@ else{
 	{
 		if($debug == false) 
 		{
-			header('Location: 13StudDenied.php');
+			header("Location: 13StudDenied.php?firstN=$firstN&lastN=$lastN&email=$Email&major=$Major");
 			return;
 		}
 	}
@@ -91,7 +96,7 @@ else{
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 
 }
-if($debug == false) { header('Location: 12StudExit.php'); }
+if($debug == false) { header("Location: 12StudExit.php?firstN=$firstN&lastN=$lastN&email=$Email&major=$Major"); }
 
 
 

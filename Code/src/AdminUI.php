@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if($debug) { echo("Session variables-> ".var_dump($_SESSION)); }
-$_SESSION["PassCon"] = false;
+$PassCon = false;
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +25,7 @@ $_SESSION["PassCon"] = false;
 			<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
 			<input type="submit" name="next" class="button main selection" value="Search for an appointment"><br>
 			<input type="submit" name="next" class="button main selection" value="Create new Admin Account"><br>
+			<?php echo("<input type=\"hidden\" name=\"PassCon\" value=\"$PassCon\">"); ?>
 		
 		</form>
 	</div>

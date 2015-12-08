@@ -14,7 +14,9 @@ elseif($_POST["next"] == 'Search for an appointment'){
 	header('Location: AdminSearchApp.php');
 }
 elseif($_POST["next"] == 'Create new Admin Account'){
-	header('Location: AdminCreateNewAdv.php');
+	$PassCon = $_POST["PassCon"];
+	$passcon = urlencode($PassCon);
+	header("Location: AdminCreateNewAdv.php?PassCon=$passcon");
 }
 
 ?>

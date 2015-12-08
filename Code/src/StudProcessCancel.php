@@ -4,6 +4,16 @@ $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
 
+$firstN = $_POST["firstN"];
+$lastN = $_POST["lastN"];
+$email = $_POST["email"];
+$major = $_POST["major"];
+
+$firstn = urlencode($firstN);
+$lastn = urlencode($lastN);
+$Email = urlencode($email);
+$Major = urlencode($major);
+
 if($_POST["cancel"] == 'Cancel'){
 	$studid = $_SESSION["studID"];
 	
@@ -27,5 +37,5 @@ if($_POST["cancel"] == 'Cancel'){
 else{
 	$_SESSION["status"] = "keep";
 }
-header('Location: 12StudExit.php');
+header("Location: 12StudExit.php?firstN=$firstn&lastN=$lastn&email=$Email&major=$Major");
 ?>

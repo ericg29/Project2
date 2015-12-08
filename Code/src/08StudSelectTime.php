@@ -15,6 +15,14 @@ session_start();
 		include('./header.php');
 		
 		$debug = false;
+		if(isset($_GET["firstN"])){$firstN = $_GET["firstN"];}
+		else{$firstN = $_POST["firstN"];}
+		if(isset($_GET["lastN"])){$lastN = $_GET["lastN"];}
+		else{$lastN = $_POST["lastN"];}
+		if(isset($_GET["email"])){$email = $_GET["email"];}
+		else{$email = $_POST["email"];}
+		if(isset($_GET["major"])){$major = $_GET["major"];}
+		else{$major = $_POST["major"];}
 
 		if(isset($_POST["advisor"])){
 			$advisor = $_POST["advisor"];
@@ -26,7 +34,7 @@ session_start();
 		
 
 		$localAdvisor = $_GET["advisor"];
-		$localMaj = $_SESSION["major"];
+		$localMaj = $major;
 
 		$sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -37,6 +45,10 @@ session_start();
 	<div id="nav">
 		<form action="StudProcessHome.php" method="post" name="Home">
 		<?php
+			echo("<input type=\"hidden\" name=\"firstN\" value=\"$firstN\">");
+			echo("<input type=\"hidden\" name=\"lastN\" value=\"$lastN\">");
+			echo("<input type=\"hidden\" name=\"email\" value=\"$email\">");
+			echo("<input type=\"hidden\" name=\"major\" value=\"$major\">");
 			if ($studExist == false || $adminCancel == true || $noApp == true){
 				
 				echo "<div class='button selected'>Signup for an appointment</div><br>";
@@ -58,6 +70,10 @@ session_start();
 	    <div class="field">
 		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
 	    <?php
+			echo("<input type=\"hidden\" name=\"firstN\" value=\"$firstN\">");
+			echo("<input type=\"hidden\" name=\"lastN\" value=\"$lastN\">");
+			echo("<input type=\"hidden\" name=\"email\" value=\"$email\">");
+			echo("<input type=\"hidden\" name=\"major\" value=\"$major\">");
 			echo("<input type=\"hidden\" name=\"advisor\" value=\"$advURL\">");
 
 			// http://php.net/manual/en/function.time.php fpr SQL statements below
@@ -116,6 +132,12 @@ session_start();
 		</div>	
 	<div>
 		<form method="link" action="02StudHome.php">
+		<?php
+			echo("<input type=\"hidden\" name=\"firstN\" value=\"$firstN\">");
+			echo("<input type=\"hidden\" name=\"lastN\" value=\"$lastN\">");
+			echo("<input type=\"hidden\" name=\"email\" value=\"$email\">");
+			echo("<input type=\"hidden\" name=\"major\" value=\"$major\">");
+		?>
 		<input type="submit" name="home" class="button large" value="Cancel">
 		</form>
 	</div>
