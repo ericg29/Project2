@@ -33,7 +33,6 @@ session_start();
 		<div class="container admin">
 		<div id="nav">
 			<form action="AdminProcessUI.php" method="post" name="UI">
-		  
 				<input type="submit" name="next" class="button main selection" value="Schedule appointments"><br>
 				<input type="submit" name="next" class="button main selection" value="Print schedule for a day"><br>
 				<input type="submit" name="next" class="button main selection" value="Edit appointments"><br>
