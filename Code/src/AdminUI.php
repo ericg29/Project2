@@ -31,11 +31,9 @@ $PassCon = false;
 	</div>
 	<div id="section">
 		<h1>Welcome to COEIT Advising</h1>
-		<?php
-			if($adminCancel == true){
-				echo "<p style='color:red'>The advisor has cancelled your appointment! Please schedule a new appointment.</p>";
-			}
-		?>
+		<div class="top" style="text-align: center">
+		<div id="home_image"></div>
+		</div>
 	</div>
 	</div>
 	<?php

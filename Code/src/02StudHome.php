@@ -45,11 +45,15 @@ session_start();
 		?>
 		</form>
 	</div>
-	<div id="section">
+	<div id="section" style="text-align: center">
 		<h1>Welcome to COEIT Advising</h1>
+		<div class="top" style="text-align: center">
+		<div id="home_image"></div>
+		</div>
+		
 		<?php
 			if($adminCancel == true){
-				echo "<p style='color:red'>The advisor has cancelled your appointment! Please schedule a new appointment.</p>";
+				echo "<p style='color:red; font-size:16px;'><br>The advisor has cancelled your appointment! Please schedule a new appointment.</p>";
 			}
 		?>
 	</div>

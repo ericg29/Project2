@@ -51,25 +51,33 @@ session_start();
 			//display message based on what action was completed
 			$_SESSION["resch"] = false;			
 			if($_SESSION["status"] == "complete"){
+				echo("<div id=\"check_image\"></div>");
 				echo "You have completed your sign-up for an advising appointment.";
 			}
 			elseif($_SESSION["status"] == "none"){
+				echo("<div id=\"X_image\"></div>");
 				echo "You did not sign up for an advising appointment.";
 			}
 			elseif($_SESSION["status"] == "cancel"){
+				echo("<div id=\"check_image\"></div>");
 				echo "You have cancelled your advising appointment.";
 			}
 			elseif($_SESSION["status"] == "resch"){
+				echo("<div id=\"check_image\"></div>");
 				echo "You have changed your advising appointment.";
 			}
 			elseif($_SESSION["status"] == "keep"){
+				echo("<div id=\"X_image\"></div>");
 				echo "No changes have been made to your advising appointment.";
 			}
 			else{
+				echo("<div id=\"X_mark\"></div>");
 				echo "An error has occurred.";
 			}
 		?>
+		<br>
         </div>
+		<br>
 		</div>
 		<form action="02StudHome.php" method="post" name="complete">
 		<?php

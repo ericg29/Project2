@@ -146,6 +146,36 @@ html{
 		float: left;
 	}
 
+	#home_image {
+		background: url(../src/images/umbc_sign.jpg);
+		background-repeat: no-repeat;
+		background-size: 425px 311px;
+		width: 425px;
+		height: 311px;
+		margin: 25px 51px 10px;
+		border-radius: 8px;
+		float: left;
+	}
+	
+	#check_image {
+		background: url(../src/images/Checkmark.png);
+		background-repeat: no-repeat;
+		background-size: 230px 230px;
+		width: 230px;
+		height: 230px;
+		margin: 50px 148.5px 10px;
+		float: left;
+	}
+	
+	#X_image {
+		background: url(../src/images/Xmark.png);
+		background-repeat: no-repeat;
+		width: 230px;
+		height: 230px;
+		margin: 50px 148.5px 10px;
+		float: left;
+	}
+	
 	a{ 
 		color: #07f; 
 		text-decoration: none; 
@@ -447,6 +477,11 @@ html{
 		margin-top: 6px; 
 		position: relative;  
 		right: 45px;
+	}
+	
+	.statusMessage {
+		text-align: center;
+		/*margin-bottom: 30px;*/
 	}
 	
 
