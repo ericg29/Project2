@@ -4,25 +4,28 @@ $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
 
+$firstn = $_POST["firstN"];
+$lastn = $_POST["lastN"];
+$major = $_POST["major"];
+$email = $_POST["email"];
+
+$firstN = urlencode($firstn);
+$lastN = urlencode($lastn);
+$Email = urlencode($email);
+$Major = urlencode($major);
+
 if($_POST["finish"] == 'Cancel'){
 	$_SESSION["status"] = "none";
 }
 else{
-	$firstn = $_POST["firstN"];
-	$lastn = $_POST["lastN"];
-	$studid = $_SESSION["studID"];
-	$major = $_POST["major"];
-	$email = $_POST["email"];
-	$advisor = $_POST["advisor"];
 	
-	$firstN = urlencode($firstn);
-	$lastN = urlencode($lastn);
-	$Email = urlencode($email);
-	$Major = urlencode($major);
+	$studid = $_SESSION["studID"];
+	$advisor = $_POST["advisor"];
 
 	if($debug) { echo("Advisor -> $advisor<br>\n"); }
 
 	$apptime = $_POST["appTime"];
+	//$stud = urlencode($_POST["studExist"]);
 	if($_POST["studExist"] == false){
 		$sql = "insert into Proj2Students (`FirstName`,`LastName`,`StudentID`,`Email`,`Major`) values ('$firstn','$lastn','$studid','$email','$major')";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -128,5 +131,3 @@ function isStillAvailable($apptime, $advisor)
 }
 
 ?>
-
-
