@@ -40,8 +40,8 @@
 				<?php
 					$first = $_GET["firstN"];
 					$last = $_GET["lastN"];
-					$user = $_SESSION["UserN"];
-					$pass = $_SESSION["PassW"];
+					$user = $_GET["usern"];
+					$pass = $_GET["passw"];
 					$room = $_GET["room"];
 					$meetingLoc = $_GET["meet"];
 			
