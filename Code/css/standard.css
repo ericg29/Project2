@@ -160,19 +160,20 @@ html{
 	#check_image {
 		background: url(../src/images/Checkmark.png);
 		background-repeat: no-repeat;
-		background-size: 230px 230px;
-		width: 230px;
-		height: 230px;
-		margin: 50px 148.5px 10px;
+		background-size: 150px 150px;
+		width: 150px;
+		height: 150px;
+		margin: 50px 188px 10px;
 		float: left;
 	}
 	
 	#X_image {
 		background: url(../src/images/Xmark.png);
 		background-repeat: no-repeat;
-		width: 230px;
-		height: 230px;
-		margin: 50px 148.5px 10px;
+		background-size: 150px 150px;
+		width: 150px;
+		height: 150px;
+		margin: 50px 188px 10px;
 		float: left;
 	}
 	
@@ -342,12 +343,12 @@ html{
 	}
 
 	.button.go {
-		background-color: #66AA44;
+		background-color: #44BB44;
 		color: #FFF;
 	}
 
 	.button.go:hover {
-		background-color: #70B74E;
+		background-color: #66DD66;
 		color: #FFF;
 	}
 
