@@ -11,4 +11,6 @@ In a previous project, we were given code for the original website. In that proj
   3. Remove redundant code
   4. Add documentation
 
+Project 1 was an individual project while Project 2 was completed in a group with 2 other students.
+
 The original website code and the Project 1 code can be found in their respective folders for reference.
